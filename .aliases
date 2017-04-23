@@ -1,0 +1,7 @@
+alias ls='ls -G'
+alias serve='python -m SimpleHTTPServer'
+alias closure-compiler-readable='closure-compiler --compilation_level WHITESPACE_ONLY --formatting PRETTY_PRINT'
+alias pip-user='pip install --user --install-option="--install-scripts=$HOME/bin"'
+alias gem-user='gem install --user-install --bindir="$HOME/bin"'
+alias jsc=/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc
+alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'

@@ -1,0 +1,9 @@
+*.idea
+*.pyc
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+.project
+.pydevproject
+.settings
+npm-debug.log
