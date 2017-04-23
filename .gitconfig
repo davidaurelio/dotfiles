@@ -1,0 +1,12 @@
+[include]
+  path = .gitconfig.local
+[color]
+	ui = true
+[core]
+	excludesfile = /Users/david/.gitignore.global
+[apply]
+	whitespace = nowarn
+[credential]
+	helper = osxkeychain
+[push]
+	default = current
