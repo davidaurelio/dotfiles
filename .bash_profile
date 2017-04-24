@@ -18,12 +18,16 @@ if [ -f ~/.bash_functions ]; then
   . ~/.bash_functions
 fi
 
+if [ -f ~/.ps1 ]; then
+  . ~/.ps1
+fi
+
 if [ -f ~/.bash_profile.local ]; then
   . ~/.bash_profile.local
 fi
 
 if [ -f ~/.iterm2_shell_integration.bash ]; then
-  ~ /.iterm2_shell_integration.bash
+  . ~/.iterm2_shell_integration.bash
 fi
 
 set -o vi
