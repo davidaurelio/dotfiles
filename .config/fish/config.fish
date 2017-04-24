@@ -8,8 +8,8 @@ end
 
 # append to path
 cat ~/.paths ~/.paths.local | while read P
-  set -xg PATH $PATH P
+  set -xg PATH $PATH (eval echo $P)
 end
 
 test -f ~/.config/fish/config.local.fish; and . ~/.config/fish/config.local.fish
-fish_vi_mode
+fish_vi_key_bindings
