@@ -1,4 +1,3 @@
-set -gx HOMEBREW_NO_ANALYTICS 1
 test -f ~/.aliases; and . ~/.aliases
 
 # set env vars
@@ -12,4 +11,6 @@ cat ~/.paths ~/.paths.local 2> /dev/null | while read P
 end
 
 test -f ~/.config/fish/config.local.fish; and . ~/.config/fish/config.local.fish
+test -f ~/.iterm2_shell_integration.fish; and source ~/.iterm2_shell_integration.fish
+
 fish_vi_key_bindings
