@@ -1,3 +1,7 @@
+.bash_profile.local
+.config/fish/fishd.*
 .dotfiles
+.env.local
 .gitconfig.local
-.config/fish/fishd.acbc32be1e63
+.hgrc.local
+.paths.local

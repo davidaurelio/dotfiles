@@ -1,11 +1,9 @@
-*.idea
-*.orig
-*.pyc
+syntax: glob
+
 *.sublime-project
 *.sublime-workspace
-*.~
+*~
 .DS_Store
-.project
-.pydevproject
-.settings
+.haste_cache/*
+.vscode/*
 npm-debug.log
