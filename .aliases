@@ -1,5 +1,4 @@
 alias ls='ls -G'
-alias brew='env HOMEBREW_NO_ANALYTICS=1 brew'
 alias serve='python -m SimpleHTTPServer'
 alias closure-compiler-readable='closure-compiler --compilation_level WHITESPACE_ONLY --formatting PRETTY_PRINT'
 alias pip-user='pip install --user --install-option="--install-scripts=$HOME/bin"'
