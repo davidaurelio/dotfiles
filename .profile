@@ -5,6 +5,8 @@ if [ -d "$NVM_DIR" ]; then
   nvm use `ls ~/.nvm/versions/node | sed s/^v// | sort  -t. -s -k 1,1rn -k 2,2rn -k3,3rn -k4,4rn | head -n1` --silent
 fi
 
+alias ls='ls -G'
+
 # set env vars
 while read -r N V; do
   export $N="`eval echo $V`"
