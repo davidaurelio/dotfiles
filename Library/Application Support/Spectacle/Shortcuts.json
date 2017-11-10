@@ -4,7 +4,7 @@
     "shortcut_name" : "RedoLastMove"
   },
   {
-    "shortcut_key_binding" : "ctrl+alt+cmd+down",
+    "shortcut_key_binding" : null,
     "shortcut_name" : "MakeSmaller"
   },
   {
@@ -32,7 +32,7 @@
     "shortcut_name" : "MoveToLowerLeft"
   },
   {
-    "shortcut_key_binding" : "ctrl+alt+cmd+up",
+    "shortcut_key_binding" : null,
     "shortcut_name" : "MakeLarger"
   },
   {
