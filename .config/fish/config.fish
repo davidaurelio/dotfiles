@@ -14,3 +14,7 @@ test -f ~/.config/fish/config.local.fish; and . ~/.config/fish/config.local.fish
 test -f ~/.iterm2_shell_integration.fish; and source ~/.iterm2_shell_integration.fish
 
 fish_vi_key_bindings
+
+
+# OPAM configuration
+. ~/.opam/opam-init/init.fish > /dev/null 2> /dev/null or true
