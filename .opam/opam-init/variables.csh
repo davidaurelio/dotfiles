@@ -1,7 +1,7 @@
 if ( ! ${?PATH} ) setenv PATH ""
 setenv PATH "$PATH:~/.opam/system/bin"
 if ( ! ${?OCAML_TOPLEVEL_PATH} ) setenv OCAML_TOPLEVEL_PATH ""
-setenv OCAML_TOPLEVEL_PATH "~/.opam/system/lib/toplevel"
+setenv OCAML_TOPLEVEL_PATH ~/.opam/system/lib/toplevel
 if ( ! ${?PERL5LIB} ) setenv PERL5LIB ""
 setenv PERL5LIB "~/.opam/system/lib/perl5:$PERL5LIB"
 if ( ! ${?MANPATH} ) setenv MANPATH ""
