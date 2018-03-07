@@ -31,3 +31,5 @@ if [ -f ~/.iterm2_shell_integration.bash ]; then
 fi
 
 set -o vi
+
+#CHEF.NO.SOURCE
