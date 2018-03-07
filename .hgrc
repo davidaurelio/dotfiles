@@ -2,3 +2,6 @@
 
 [ui]
 ignore = ~/.hgignore.global
+
+[experimental]
+worddiff = True
