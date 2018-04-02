@@ -5,7 +5,6 @@ setenv OCAML_TOPLEVEL_PATH ~/.opam/system/lib/toplevel
 if ( ! ${?PERL5LIB} ) setenv PERL5LIB ""
 setenv PERL5LIB "~/.opam/system/lib/perl5:$PERL5LIB"
 if ( ! ${?MANPATH} ) setenv MANPATH ""
-setenv MANPATH "${MANPATH}:~/.opam/system/man"
 if ( ! ${?OPAMUTF8MSGS} ) setenv OPAMUTF8MSGS ""
 setenv OPAMUTF8MSGS "1"
 if ( ! ${?CAML_LD_LIBRARY_PATH} ) setenv CAML_LD_LIBRARY_PATH ""
