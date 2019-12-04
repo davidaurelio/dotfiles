@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -eu -o pipefail
+
+COMMIT="$(git rev-parse ${1-"HEAD"})"
+
+BRANCH="$(git branch --points-at "$COMMIT" --format '%(refname:short)' \
+    | grep -v '^(HEAD detached at [0-9a-f]*)$' \
+    | head -n1 \
+    || true)"
+
+if [[ -n "$BRANCH" ]]; then
+  echo "$BRANCH"
+else
+  TAG="$(git tag --points-at "$COMMIT" --format '%(refname:short)' | head -n1)"
+  if [[ -n "$TAG" ]]; then
+    echo "$TAG"
+  else
+    echo "$COMMIT"
+  fi
+fi

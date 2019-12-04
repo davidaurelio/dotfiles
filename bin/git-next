@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -eu -o pipefail
+
+CHILDREN=($(git rev-list --all --not  HEAD^@ --children \
+            | grep "^$(git rev-parse HEAD)"))
+
+case ${#CHILDREN[@]}
+in
+  0 | 1)
+    echo "Commit has no children" >&2
+    exit 2;;
+  2)
+    git checkout "$(git-canonical ${CHILDREN[1]})";;
+  *)
+    echo "Commit has multiple children: " >&2
+    echo "${CHILDREN[@]:1}" >&2
+    exit 1;;
+esac
