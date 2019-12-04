@@ -2,7 +2,7 @@
 
 set -eu
 
-find ~/.config/dotfiles/Application\ Support -depth 1 -type d | while read CONFIG; do
+find ~/.config/dotfiles/Application\ Support -depth 1 -type d -o -type l | while read CONFIG; do
   LINK=~/Library/Application\ Support/"$(basename "$CONFIG")"
 
   # Continue if the link already exists
