@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[this._${1:name} = ${1};${0:}]]></content>
+    <tabTrigger>@_</tabTrigger>
+    <scope>source.js</scope>
+    <description>Function</description>
+</snippet>

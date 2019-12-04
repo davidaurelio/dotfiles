@@ -1,0 +1,119 @@
+{
+    "debug": false,
+    "delay": 0.3,
+    "gutter_theme": "none",
+    "lint_mode": "background",
+    "linters": {
+        "clang++": {
+            "disable": false,
+            "excludes": [],
+            "args": "-Wall -fsyntax-only -fno-caret-diagnostics -Wextra -Wpedantic -Wdouble-promotion -Wuninitialized -std=c++14 -Wno-pragma-once-outside-header",
+            "I": [
+                "/usr/local/include/*",
+                "${file_path}",
+            ],
+            "selector": "source.c, source.c++, source.objc++",
+        },
+        "eslint": {
+            "disable": false,
+            "args": [],
+            "excludes": []
+        },
+        "flow": {
+            "disable": false,
+            "all": false,
+            "args": [],
+            "excludes": [],
+            "flow-bin": null,
+            "show-all-errors": true
+        },
+        "ghc": {
+            "disable": false,
+            "args": [],
+            "excludes": []
+        },
+        "javac": {
+            "disable": false,
+            "args": [],
+            "excludes": [],
+            "lint": ""
+        },
+        "json": {
+            "disable": false,
+            "args": [],
+            "excludes": [],
+            "strict": true
+        },
+        "jsxhint": {
+            "disable": true,
+            "args": [],
+            "excludes": []
+        },
+        "mypy": {
+            "disable": true,
+        },
+        "pep8": {
+            "disable": true,
+            "args": [],
+            "excludes": [],
+            "ignore": "",
+            "max-line-length": null,
+            "select": ""
+        },
+        "pylint": {
+            "disable": true,
+            "args": [],
+            "enable": "",
+            "excludes": [],
+            "paths": [],
+            "rcfile": "",
+            "show-codes": false
+        },
+        "tslint": {
+            "disable": true,
+            "args": [],
+            "excludes": []
+        }
+    },
+    "no_column_highlights_line": true,
+    "paths": {
+        "linux": [],
+        "osx": [],
+        "windows": []
+    },
+    "show_hover_line_report": true,
+    "show_hover_region_report": true,
+    "show_marks_in_minimap": true,
+    "styles": [
+        {
+            "mark_style": "outline",
+            "priority": 1,
+            "scope": "region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter",
+            "icon": "dot",
+            "types": [
+                "warning"
+            ]
+        },
+        {
+            "mark_style": "outline",
+            "priority": 1,
+            "scope": "region.redish markup.deleted.sublime_linter markup.error.sublime_linter",
+            "icon": "dot",
+            "types": [
+                "error"
+            ]
+        }
+    ],
+
+    "syntax_map": {
+        "html (django)": "html",
+        "html (rails)": "html",
+        "html 5": "html",
+        "javascript (babel)": "javascript",
+        "magicpython": "python",
+        "php": "html",
+        "python django": "python",
+        "pythonimproved": "python"
+    }
+
+}

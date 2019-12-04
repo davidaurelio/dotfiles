@@ -1,0 +1,21 @@
+Backup
+Cache
+Index
+Installed Packages
+Local
+Packages/*/*
+!Packages/User/*
+Packages/User/SublimeLinter/*.tmTheme
+Packages/User/Package Control.last-run
+Packages/User/Package Control.ca-list
+Packages/User/Package Control.ca-bundle
+Packages/User/Package Control.merged-ca-bundle
+Packages/User/Package Control.system-ca-bundle
+Packages/User/Package Control.user-ca-bundle
+Packages/User/Package Control.cache/
+Packages/User/Package Control.ca-certs/
+Packages/User/oscrypto-ca-bundle.crt
+
+Packages/User/Color Highlighter/ColorPicker_osx_x64
+Packages/User/Color Highlighter/icons/
+Packages/User/Color Highlighter/themes/

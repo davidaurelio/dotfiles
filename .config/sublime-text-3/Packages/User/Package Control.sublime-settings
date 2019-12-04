@@ -1,0 +1,47 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"install_prereleases":
+	[
+		"SublimeLinter",
+		"SublimeLinter-flake8"
+	],
+	"installed_packages":
+	[
+		"AceJump",
+		"Anaconda",
+		"ApacheConf",
+		"Babel",
+		"Case Conversion",
+		"Clang Format",
+		"CMake",
+		"EditorConfig",
+		"fish",
+		"FuzzyFilePath",
+		"Hyperion for gettext",
+		"INI",
+		"JsPrettier",
+		"NASM x86 Assembly",
+		"Package Control",
+		"Project Specific Syntax Settings",
+		"requirementstxt",
+		"Rust Enhanced",
+		"RustFmt",
+		"SideBarEnhancements",
+		"Solarized Color Scheme",
+		"Statusbar Path",
+		"SublimeLinter",
+		"SublimeLinter-clang",
+		"SublimeLinter-eslint",
+		"SublimeLinter-javac",
+		"SublimeLinter-json",
+		"TOML",
+		"TypeScript",
+		"Unicode Escape"
+	],
+	"repositories":
+	[
+	]
+}
