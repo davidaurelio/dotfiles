@@ -1,0 +1,8 @@
+<snippet>
+    <content><![CDATA[it('${1:test description}', ${2:()} => {
+  ${0:}
+});]]></content>
+    <tabTrigger>it</tabTrigger>
+    <scope>source.js</scope>
+    <description>BDD Test</description>
+</snippet>
