@@ -18,6 +18,7 @@
 	"font_size": 13,
 	"ignored_packages":
 	[
+		"Rust",
 		"Vintage"
 	],
 	"line_padding_bottom": 0,
