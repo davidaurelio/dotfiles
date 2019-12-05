@@ -14,6 +14,6 @@ in
     git-canonical --checkout "${CHILDREN[1]})";;
   *)
     echo "Commit has multiple children: " >&2
-    echo "${CHILDREN[@]:1}" >&2
+    git show --oneline --no-patch ${CHILDREN[@]:1} >&2
     exit 1;;
 esac
