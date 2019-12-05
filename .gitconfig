@@ -11,3 +11,6 @@
   helper = osxkeychain
 [push]
   default = current
+[mergetool]
+	keepBackup = false
+	keepTemporaries = false
