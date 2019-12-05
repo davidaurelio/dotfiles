@@ -4,6 +4,7 @@
 		".eslintrc",
 		".babelrc",
 		"sublime-workspace",
-		"sublime-settings"
+		"sublime-settings",
+		".prettierrc"
 	]
 }
