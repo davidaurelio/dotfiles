@@ -2,7 +2,27 @@
 
 set -eu -o pipefail
 
-COMMIT="$(git rev-parse ${1-"HEAD"})"
+CMD=echo
+COMMIT=
+
+while (( $# )); do
+  case "$1" in
+    -c|--checkout)
+      CMD="git checkout"
+      shift
+      ;;
+    --)
+      COMMIT="$2"
+      break
+      ;;
+    *)
+      COMMIT="$1"
+      break
+      ;;
+  esac
+done
+
+COMMIT="$(git rev-parse ${COMMIT:-"HEAD"})"
 
 BRANCH="$(git branch --points-at "$COMMIT" --format '%(refname:short)' \
     | grep -v '^(HEAD detached at [0-9a-f]*)$' \
@@ -10,12 +30,12 @@ BRANCH="$(git branch --points-at "$COMMIT" --format '%(refname:short)' \
     || true)"
 
 if [[ -n "$BRANCH" ]]; then
-  echo "$BRANCH"
+  $CMD "$BRANCH"
 else
   TAG="$(git tag --points-at "$COMMIT" --format '%(refname:short)' | head -n1)"
   if [[ -n "$TAG" ]]; then
-    echo "$TAG"
+    $CMD "$TAG"
   else
-    echo "$COMMIT"
+    $CMD "$COMMIT"
   fi
 fi
