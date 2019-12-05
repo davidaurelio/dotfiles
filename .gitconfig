@@ -4,6 +4,7 @@
   ui = true
 [core]
   excludesfile = ~/.gitignore.global
+  precomposeUnicode = true
 [apply]
   whitespace = nowarn
 [credential]
