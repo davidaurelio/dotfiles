@@ -10,7 +10,7 @@ in
     echo "Commit has no parents" >&2
     exit 2;;
   1)
-    git checkout "$(git-canonical ${PARENTS[0]})";;
+    git-canonical --checkout "${PARENTS[0]})";;
   *)
     echo "Commit has multiple parents: " >&2
     echo "${PARENTS[@]}" >&2
