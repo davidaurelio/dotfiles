@@ -9,7 +9,8 @@ set showmatch      " Highlight matching brace
 set visualbell
 
 syntax on
-colorscheme desert
+set background=light
+colorscheme solarized
 
 set hlsearch       " Highlight all search results
 set smartcase      " Enable smart-case search
