@@ -1,4 +1,5 @@
 test -f ~/.aliases; and . ~/.aliases
+test -f ~/.aliases.local; and . ~/.aliases.local
 
 # set env vars
 cat ~/.env ~/.env.local 2> /dev/null | while read N V

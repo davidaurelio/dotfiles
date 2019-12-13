@@ -10,6 +10,10 @@ if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
 
+if [ -f ~/.aliases.local ]; then
+    . ~/.aliases.local
+fi
+
 if type -p brew 2> /dev/null && [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
