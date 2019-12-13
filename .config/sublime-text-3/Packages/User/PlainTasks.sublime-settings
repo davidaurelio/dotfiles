@@ -1,0 +1,8 @@
+{
+  "open_tasks_bullet": "[ ]",
+  "done_tasks_bullet": "[x]",
+  "cancelled_tasks_bullet": "[-]",
+  "before_tasks_bullet_margin": 2,
+  "date_format": "(%Y-%m-%d %H:%M)",
+  "color_scheme": "Packages/PlainTasks/tasks-solarized-light.hidden-tmTheme",
+}
