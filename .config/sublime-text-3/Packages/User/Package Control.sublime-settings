@@ -41,7 +41,8 @@
 		"SublimeLinter-json",
 		"TOML",
 		"TypeScript",
-		"Unicode Escape"
+		"Unicode Escape",
+		"WebAssembly Text Syntax"
 	],
 	"repositories":
 	[
