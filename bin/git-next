@@ -11,7 +11,7 @@ in
     echo "Commit has no children" >&2
     exit 2;;
   2)
-    git-canonical --checkout "${CHILDREN[1]})";;
+    git-canonical --checkout "${CHILDREN[1]}";;
   *)
     echo "Commit has multiple children: " >&2
     git show --oneline --no-patch ${CHILDREN[@]:1} >&2
