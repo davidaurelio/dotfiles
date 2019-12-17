@@ -1,27 +1,24 @@
 function fish_mode_prompt
-  set -l colour
+  set -l color
   set -l indicator
 
   switch $fish_bind_mode
     case default
-      set colour red
+      set color red
       set indicator 🅽
     case insert
-      set colour green
+      set color green
       set indicator 🅸
     case replace_one
-      set colour green
+      set color green
       set indicator 🆁
     case visual
-      set colour brmagenta
+      set color brmagenta
       set indicator 🆅
     case '*'
-      set colour red
+      set color red
       set indicator '?'
   end
 
-
-  if test -n $indicator
-    echo -n (set_color $colour)"$indicator  "(set_color normal)
-  end
+  echo -n (set_color $color)"$indicator"(set_color normal)
 end
