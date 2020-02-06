@@ -11,6 +11,7 @@
 	"installed_packages":
 	[
 		"AceJump",
+		"ActualVim",
 		"Anaconda",
 		"ApacheConf",
 		"Babel",
@@ -20,6 +21,7 @@
 		"EasyClangComplete",
 		"EditorConfig",
 		"fish",
+		"FlowType",
 		"FuzzyFilePath",
 		"Hyperion for gettext",
 		"INI",
@@ -37,6 +39,7 @@
 		"SublimeLinter",
 		"SublimeLinter-clang",
 		"SublimeLinter-eslint",
+		"SublimeLinter-flow",
 		"SublimeLinter-javac",
 		"SublimeLinter-json",
 		"Terminus",

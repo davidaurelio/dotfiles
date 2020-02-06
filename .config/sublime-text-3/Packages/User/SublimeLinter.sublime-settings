@@ -24,7 +24,9 @@
             "all": false,
             "args": [],
             "excludes": [],
-            "flow-bin": null,
+            "coverage": true,
+            "flow-bin": "/usr/local/bin/flow",
+            "lib": ["flow-typed/"],
             "show-all-errors": true
         },
         "ghc": {
