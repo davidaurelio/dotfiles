@@ -16,7 +16,7 @@
         "eslint": {
             "disable": false,
             "args": [],
-            "excludes": []
+            "excludes": ["*.ejs"]
         },
         "flow": {
             "disable": false,
