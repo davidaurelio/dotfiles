@@ -1,0 +1,15 @@
+﻿---
+Language: Cpp
+BasedOnStyle: Chromium
+AccessModifierOffset: -2
+AlignAfterOpenBracket: AlwaysBreak
+AlignOperands: false
+AlignTrailingComments: false
+AllowAllArgumentsOnNextLine: false
+AllowAllConstructorInitializersOnNextLine: false
+AllowShortBlocksOnASingleLine: Always
+AllowShortIfStatementsOnASingleLine: WithoutElse
+BinPackArguments: false
+SpacesInContainerLiterals: false
+
+...
