@@ -1,14 +1,3 @@
-function fish_prompt_postexec --on-event fish_postexec
-    set -l last_status $status
-    if [ "$last_status" != 0 ]
-        set_color --background red
-        set_color --bold white
-        printf "╰─⯈ % 3s: " $last_status
-        string replace --regex '(.{60}).{4,}' '$1...' $argv[1]
-        set_color normal
-    end
-end
-
 function fish_prompt_real
     set -l color_cwd
     set -l suffix
