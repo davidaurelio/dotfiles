@@ -1,5 +1,7 @@
 {
 	"extensions":
 	[
+		"js",
+		"mjs",
 	]
 }
