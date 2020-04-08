@@ -20,16 +20,12 @@ function fish_prompt_real
         set user $USER
     end
 
-    set -l vcs (hg_tip "(%s)")
-    if [ -z "$vcs" ]
-        set vcs (fish_git_prompt "(%s)")
-    end
-
     echo -n -s "$user" \
         @ (prompt_hostname) ' ' \
         (set_color yellow) \
-        $vcs \
+        (vcs_tip '(%s)') \
         (set_color $color_cwd) \
         (prompt_pwd) \
         (set_color normal) "$suffix "
+
 end
