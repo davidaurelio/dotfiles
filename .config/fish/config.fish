@@ -11,6 +11,9 @@ cat ~/.paths ~/.paths.local 2> /dev/null | while read P
   set -xg PATH $PATH (eval echo $P)
 end
 
+# force load postexec function
+functions -q _postexec_hook
+
 test -f ~/.config/fish/config.local.fish; and . ~/.config/fish/config.local.fish
 test -f ~/.iterm2_shell_integration.fish; and source ~/.iterm2_shell_integration.fish
 
