@@ -20,5 +20,5 @@ function fish_mode_prompt
       set indicator '?'
   end
 
-  echo -n (set_color $color)"$indicator "(set_color normal)
+  echo -n -s (set_color $color) "$indicator " (set_color normal)
 end
