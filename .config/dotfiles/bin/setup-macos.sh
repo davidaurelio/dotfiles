@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eu -o pipefail
+set -eux -o pipefail
 
 CONFIG=~/.config
 DOTFILES="$CONFIG/dotfiles"
@@ -27,6 +27,7 @@ safelink () {
   fi
 
   # Write the link
+  mkdir -p "$(dirname "$CONFIG")"
   ln -Fhis "$DOTFILE" "$CONFIG"
 }
 
