@@ -43,3 +43,4 @@ defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "~/.config/dotf
 defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true
 safelink_config sublime-text-3 "Application Support/Sublime Text 3"
 safelink_library "Application Support/ControllerMate"
+safelink_library "Application Support/Alfred/Alfred.alfredpreferences/preferences"
