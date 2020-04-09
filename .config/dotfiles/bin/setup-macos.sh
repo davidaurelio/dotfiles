@@ -38,5 +38,7 @@ safelink_library () {
   safelink "$DOTFILES/Library/$1" ~/Library/"$1"
 }
 
+defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "~/.config/dotfiles/Library/Preferences"
+defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true
 safelink_config sublime-text-3 "Application Support/Sublime Text 3"
 safelink_library "Application Support/ControllerMate"
