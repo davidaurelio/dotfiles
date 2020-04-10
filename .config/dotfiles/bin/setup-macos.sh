@@ -81,4 +81,5 @@ brew cask install \
   dash4 \
   firefox \
   google-chrome \
+  iTerm2 \
   sublime-text
