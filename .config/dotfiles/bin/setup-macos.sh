@@ -39,12 +39,23 @@ safelink_library () {
   safelink "$DOTFILES/Library/$1" ~/Library/"$1"
 }
 
+# macos defaults
+defaults write -globalDomain AppleInterfaceStyleSwitchesAutomatically -bool true  ## auto dark mode
+defaults write -globalDomain AppleScrollerPagingBehavior -bool true  ## scroll bar click jump to spot
+defaults write -globalDomain AppleShowScrollBars WhenScrolling  ## show scrollbars when scrolling
+defaults write -globalDomain KeyRepeat -int 2
+defaults write -globalDomain InitialKeyRepeat -int 15
+defaults write -globalDomain AppleKeyboardUIMode -int 3  ## use tab to focus all controls
+defaults write -globalDomain com.apple.mouse.scaling -float 3
+
+# Configuration
 defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "~/.config/dotfiles/Library/Preferences"
 defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true
 safelink_config sublime-text-3 "Application Support/Sublime Text 3"
 safelink_library "Application Support/ControllerMate"
 safelink_library "Application Support/Alfred/Alfred.alfredpreferences/preferences"
 
+# Install homebrew
 if ! which -s brew; then
   /bin/bash -c \
     "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
