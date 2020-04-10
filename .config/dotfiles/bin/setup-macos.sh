@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eux -o pipefail
+set -eu -o pipefail
 
 CONFIG=~/.config
 DOTFILES="$CONFIG/dotfiles"
@@ -74,3 +74,9 @@ brew install \
   socat \
   tree \
   yarn
+
+brew cask install \
+  dash4 \
+  firefox \
+  google-chrome \
+  sublime-text
