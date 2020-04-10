@@ -44,3 +44,22 @@ defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true
 safelink_config sublime-text-3 "Application Support/Sublime Text 3"
 safelink_library "Application Support/ControllerMate"
 safelink_library "Application Support/Alfred/Alfred.alfredpreferences/preferences"
+
+if ! which -s brew; then
+  /bin/bash -c \
+    "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+fi
+
+brew install \
+  cmake \
+  colordiff \
+  fish \
+  git \
+  htop \
+  jq \
+  neovim \
+  nvm \
+  ripgrep \
+  socat \
+  tree \
+  yarn
