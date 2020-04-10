@@ -61,6 +61,8 @@ if ! which -s brew; then
     "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
+set +e
+
 brew install \
   cmake \
   colordiff \
@@ -71,7 +73,6 @@ brew install \
   neovim \
   nvm \
   ripgrep \
-  socat \
   tree \
   yarn
 
