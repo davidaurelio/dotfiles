@@ -76,6 +76,7 @@ brew install \
   tree \
   yarn
 
+brew tap homebrew/cask-versions
 brew cask install \
   dash4 \
   firefox \
