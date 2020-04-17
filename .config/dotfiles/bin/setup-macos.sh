@@ -86,6 +86,9 @@ brew tap homebrew/cask-versions
 brew cask install \
   dash4 \
   firefox \
+  gitup \
   google-chrome \
-  iTerm2 \
-  sublime-text
+  iterm2 \
+  sublime-text \
+  suspicious-package \
+  the-unarchiver
