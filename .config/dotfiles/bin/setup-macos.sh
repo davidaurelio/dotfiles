@@ -47,6 +47,8 @@ defaults write -globalDomain KeyRepeat -int 2
 defaults write -globalDomain InitialKeyRepeat -int 15
 defaults write -globalDomain AppleKeyboardUIMode -int 3  ## use tab to focus all controls
 defaults write -globalDomain com.apple.mouse.scaling -float 3
+defaults write -globalDomain NSCloseAlwaysConfirmsChanges -bool true
+defaults write -globalDomain NSQuitAlwaysKeepsWindows -bool true
 defaults write -globalDomain NSAutomaticCapitalizationEnabled -bool false
 defaults write -globalDomain NSAutomaticDashSubstitutionEnabled -bool false
 defaults write -globalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
