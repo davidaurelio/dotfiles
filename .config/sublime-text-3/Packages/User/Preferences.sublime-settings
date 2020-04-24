@@ -18,6 +18,7 @@
 	"font_face": "PragmataPro Liga",
 	"font_options":
 	[
+		"dlig"
 	],
 	"highlight_line": true,
 	"ignored_packages":
