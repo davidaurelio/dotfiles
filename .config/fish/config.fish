@@ -2,13 +2,15 @@ test -f ~/.aliases; and . ~/.aliases
 test -f ~/.aliases.local; and . ~/.aliases.local
 
 # set env vars
-cat ~/.env ~/.env.local 2> /dev/null | while read N V
-  set -xg $N (eval echo $V)
+cat ~/.env{,.local} 2> /dev/null | while read -d= N V
+  echo -- $V | read --tokenize --list V
+  set -xg $N $V
 end
 
 # append to path
-cat ~/.paths ~/.paths.local 2> /dev/null | while read P
-  set -xg PATH $PATH (eval echo $P)
+cat cat ~/.paths ~/.paths.local 2> /dev/null \
+| while read P
+  set -a PATH (eval echo $P | string join " ")
 end
 
 # force load postexec function
