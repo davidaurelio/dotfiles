@@ -13,6 +13,15 @@ cat cat ~/.paths ~/.paths.local 2> /dev/null \
   set -a PATH (eval echo $P | string join " ")
 end
 
+# enable fnm
+type -q fnm; and fnm env --shell=fish --multi | source
+
+# enable direnv. We prefer a custom `--on-variable PWD` hook
+type -q direnv
+and function __direnv_export_eval --on-variable PWD
+  direnv export fish | source;
+end
+
 # force load postexec function
 functions -q _postexec_hook
 

@@ -80,10 +80,10 @@ brew install \
   htop \
   jq \
   neovim \
-  nvm \
   ripgrep \
   tree \
-  yarn
+  yarn \
+  Schniz/tap/fnm
 
 brew tap homebrew/cask-versions
 brew cask install \
