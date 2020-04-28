@@ -74,6 +74,7 @@ set +e
 brew install \
   cmake \
   colordiff \
+  direnv \
   fish \
   git \
   htop \
