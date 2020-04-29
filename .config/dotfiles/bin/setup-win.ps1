@@ -43,16 +43,15 @@ if (!(Test-Path $sublimeConfigPath -PathType Container)) {
 }
 
 
-# link profile for newest and system powershells
+# source profile for pwsh and system powershell
 Function Link-Profile($psProfile) {
     $dir = Split-Path -Parent $psProfile
     if (!(Test-Path $dir -PathType Container)) {
         New-Item -ItemType Directory -Path $(Split-Path -Parent $dir)
     }
     if (!(Test-Path $psProfile -PathType Leaf)) {
-        New-Item -ItemType HardLink `
-                 -Path $psProfile `
-                 -Target $HOME\.config\dotfiles\Documents\PowerShell\Profile.ps1
+        Set-Content -Path $psProfile `
+                    -Value '. $HOME/.config/powershell/Microsoft.PowerShell_profile.ps1'
     }
 }
 
