@@ -4,6 +4,14 @@
     "gutter_theme": "none",
     "lint_mode": "background",
     "linters": {
+        "clang": {
+            "disable": false,
+            "excludes": [],
+            "args": "-Wall -fsyntax-only -fno-caret-diagnostics -Wextra -Wpedantic -Wdouble-promotion -Wuninitialized -std=c11 -Wno-pragma-once-outside-header",
+            "I": [
+                "/usr/local/include/*",
+            ],
+        },
         "clang++": {
             "disable": false,
             "excludes": [],
@@ -11,7 +19,22 @@
             "I": [
                 "/usr/local/include/*",
             ],
-            "selector": "source.c, source.c++, source.objc++",
+        },
+        "clang-objc": {
+            "disable": false,
+            "excludes": [],
+            // "args": "-Wall -fsyntax-only -fno-caret-diagnostics -Wextra -Wpedantic -Wdouble-promotion -Wuninitialized -std=c11 -Wno-pragma-once-outside-header",
+            "I": [
+                "/usr/local/include/*",
+            ],
+        },
+        "clang-objc++": {
+            "disable": false,
+            "excludes": [],
+            "args": "-Wall -fsyntax-only -fno-caret-diagnostics -Wextra -Wpedantic -Wdouble-promotion -Wuninitialized -std=c++17 -Wno-pragma-once-outside-header",
+            "I": [
+                "/usr/local/include/*",
+            ],
         },
         "eslint": {
             "disable": false,
