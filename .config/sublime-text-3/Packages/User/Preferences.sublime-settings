@@ -12,6 +12,7 @@
 	],
 	"color_scheme": "Packages/Solarized Color Scheme/Solarized (light).sublime-color-scheme",
 	"copy_with_empty_selection": false,
+	"default_line_ending": "unix",
 	"enable_hexadecimal_encoding": false,
 	"enable_language_service_for_javascript": false,
 	"ensure_newline_at_eof_on_save": true,
