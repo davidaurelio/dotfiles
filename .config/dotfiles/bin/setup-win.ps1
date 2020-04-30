@@ -47,7 +47,7 @@ if (!(Test-Path $sublimeConfigPath -PathType Container)) {
 Function Link-Profile($psProfile) {
     $dir = Split-Path -Parent $psProfile
     if (!(Test-Path $dir -PathType Container)) {
-        New-Item -ItemType Directory -Path $(Split-Path -Parent $dir)
+        New-Item -ItemType Directory -Path $dir
     }
     if (!(Test-Path $psProfile -PathType Leaf)) {
         Set-Content -Path $psProfile `
