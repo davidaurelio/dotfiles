@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -eu -o pipefail
+
+if [ $# -lt 1 ]; then
+    echo "Usage: $(basename "$0") ONTO [SUBTREE]" >&2
+    exit 1
+fi
+
+ONTO="$1"
+COMMIT="${2:-HEAD}"
+
+git branch --contains "$COMMIT" --format='%(refname:short)' \
+    | xargs -n1 git rebase --rebase-merges=no-rebase-cousins --onto "$ONTO" "$COMMIT^"
