@@ -9,8 +9,12 @@ set showmatch      " Highlight matching brace
 set visualbell
 
 syntax on
-set background=light
-colorscheme solarized
+
+let g:os = substitute(system('uname'), '\n', '', '')
+if g:os == "Darwin" ||  g:os == "Linux"
+    set background=light
+    colorscheme solarized
+endif
 
 set hlsearch       " Highlight all search results
 set smartcase      " Enable smart-case search
