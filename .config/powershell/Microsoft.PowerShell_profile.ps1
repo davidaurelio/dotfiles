@@ -13,3 +13,31 @@ foreach ($file in "$HOME/.env", "$HOME/.env.local")  {
         }
     }
 }
+
+function prompt() {
+  $userColor = 'Gray'
+  try {
+    if (([Security.Principal.WindowsPrincipal] `
+          [Security.Principal.WindowsIdentity]::GetCurrent()
+        ).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+      $userColor = 'DarkRed'
+    }
+  } catch {}
+
+  $dir = "$($executionContext.SessionState.Path.CurrentLocation)"
+  if ($dir.StartsWith("$HOME")) {
+    $dir = $dir.replace("$HOME", "~")
+  }
+
+  Write-Host -NoNewline "PS "
+  if ($gitHead = git rev-parse --short HEAD 2>$null) {
+    $gitRef = git symbolic-ref --quiet --short HEAD
+    if ("$gitRef" -ne '') {
+      $gitHead = $gitRef
+    }
+    Write-Host -NoNewline -ForegroundColor DarkYellow "($gitHead) "
+  }
+  Write-Host -NoNewline -ForegroundColor $userColor "$dir$('>' * ($nestedPromptLevel + 1))"
+
+  return " "
+}
