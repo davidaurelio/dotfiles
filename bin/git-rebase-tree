@@ -8,7 +8,12 @@ if [ $# -lt 1 ]; then
 fi
 
 ONTO="$1"
-COMMIT="${2:-HEAD}"
+
+if [ $# -lt 2 ]; then
+  COMMIT=$(git rev-list "$(git merge-base "$ONTO" HEAD)"..HEAD | tail -n1)
+else
+  COMMIT="$2"
+fi
 
 git branch --contains "$COMMIT" --format='%(refname:short)' \
     | xargs -n1 git rebase --rebase-merges=no-rebase-cousins --onto "$ONTO" "$COMMIT^"
