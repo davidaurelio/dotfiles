@@ -11,9 +11,13 @@ set visualbell
 syntax on
 
 let g:os = substitute(system('uname'), '\n', '', '')
+
 if g:os == "Darwin" ||  g:os == "Linux"
+    set termguicolors
     set background=light
     colorscheme solarized
+elseif has('vcon')
+    set termguicolors
 endif
 
 set hlsearch       " Highlight all search results
@@ -29,3 +33,4 @@ set softtabstop=2
 
 set ruler          " Show row and column ruler information
 set undolevels=1000
+
