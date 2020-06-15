@@ -4,6 +4,8 @@
 <dict>
 	<key>AutoHideTmuxClientSession</key>
 	<true/>
+	<key>Default Bookmark Guid</key>
+	<string>8A5A3AB8-25ED-4B85-B31D-1265E021952C</string>
 	<key>DimBackgroundWindows</key>
 	<true/>
 	<key>DimOnlyText</key>
@@ -14,6 +16,8 @@
 	<true/>
 	<key>HideTab</key>
 	<false/>
+	<key>LoadPrefsFromCustomFolder</key>
+	<true/>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -236,6 +240,8 @@
 			</dict>
 			<key>Brighten Bold Text</key>
 			<false/>
+			<key>Command</key>
+			<string>/bin/bash --login</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -271,10 +277,10 @@
 				<key>Red Component</key>
 				<real>0.93333333333333335</real>
 			</dict>
+			<key>Custom Command</key>
+			<string>No</string>
 			<key>Default Bookmark</key>
 			<string>No</string>
-			<key>Description</key>
-			<string>Default</string>
 			<key>Foreground Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -286,6 +292,15 @@
 				<key>Red Component</key>
 				<real>0.396078431372549</real>
 			</dict>
+			<key>Guid</key>
+			<string>8A5A3AB8-25ED-4B85-B31D-1265E021952C</string>
+			<key>Jobs to Ignore</key>
+			<array>
+				<string>rlogin</string>
+				<string>ssh</string>
+				<string>slogin</string>
+				<string>telnet</string>
+			</array>
 			<key>Link Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -303,6 +318,8 @@
 			<string>Default</string>
 			<key>Normal Font</key>
 			<string>PragmataProMono-Regular 13</string>
+			<key>Prompt Before Closing 2</key>
+			<false/>
 			<key>Rows</key>
 			<integer>40</integer>
 			<key>Screen</key>
@@ -335,6 +352,8 @@
 			<false/>
 			<key>Silence Bell</key>
 			<true/>
+			<key>Tags</key>
+			<array/>
 			<key>Thin Strokes</key>
 			<integer>1</integer>
 		</dict>
@@ -343,8 +362,8 @@
 	<false/>
 	<key>OpenTmuxWindowsIn</key>
 	<integer>1</integer>
-	<key>PromptOnQuit</key>
-	<false/>
+	<key>PrefsCustomFolder</key>
+	<string>~/.config/dotfiles/Library/Preferences</string>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
