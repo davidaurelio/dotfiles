@@ -21,3 +21,4 @@
 [alias]
 	root = rev-parse --show-toplevel
 	exec = "!exec "
+	wtstat = each-worktree --header status --short --branch
