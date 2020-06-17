@@ -1,0 +1,26 @@
+[
+  {
+    "caption": "New File: Relative To Project Root",
+    "command": "extra_file_commands_new",
+    "args": {"base": "project_path"},
+  },
+  {
+    "caption": "New File: Relative To Current File",
+    "command": "extra_file_commands_new",
+    "args": {"base": "file_path"},
+  },
+  {
+    "caption": "New File: Relative To Base Folder",
+    "command": "extra_file_commands_new",
+    "args": {"base": "folder"},
+  },
+  {
+    "caption": "File: Delete",
+    "command": "extra_file_commands_delete",
+  },
+  {
+    "caption": "File: Delete and Close",
+    "command": "extra_file_commands_delete",
+    "args": {"close": true},
+  },
+]
