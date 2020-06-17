@@ -1,0 +1,76 @@
+#!/bin/bash
+
+set -eu -o pipefail
+
+usage () {
+  if [ -n "${1:-}" ]; then
+    echo "$1" >&2
+  fi
+
+  cat >&2 <<EOF
+Usage: $(basename -- "$0" | sed -e 's/-/ /') [--header] <CMD>
+
+Runs CMD in every worktree. CMD is interpreted as git command,
+or as shell command when prefixed with an exclamation mark (!).
+
+Options:
+  -h/--help Display this help message
+  --header
+EOF
+
+  exit 1
+}
+
+PRINT_HEADERS=
+PRINT_USAGE=
+while [[ "${1:-}" == -* ]]; do
+  case "$1" in
+  --header)
+    PRINT_HEADERS=1
+    ;;
+  -h| --help| '')
+    usage
+    ;;
+  *)
+    usage "Unknown option: $1"
+    ;;
+  esac
+  shift
+done
+
+test $# -eq 0 && usage "Missing command"
+
+
+WORKTREES="$(git worktree list --porcelain | grep -E '^worktree ' | cut -c10-)"
+
+if [ "$PRINT_HEADERS" = 1 ]; then
+  COMMON_PREFIX="$(
+    echo "$WORKTREES" \
+    | sed -e 's,$,/,;1{h;d;}' -e 'G;s,\(.*/\).*\n\1.*,\1,;h;$!d;s,/$,,')"
+  PREFIX="${COMMON_PREFIX:-$PWD}"
+  BASE="$(basename "$PREFIX")"
+  LEN=${#PREFIX}
+
+  header() {
+    echo
+    WT_PATH="${BASE}${1:$LEN}"
+    echo $WT_PATH
+    echo ${WT_PATH//?/=}
+  }
+else
+  header() {
+    true
+  }
+fi
+
+CMD=git
+if [[ "$1" == !* ]]; then
+  CMD="${1:1}"
+  shift
+fi
+
+echo "$WORKTREES" | while read WT; do
+  cd "$WT"
+  header "$WT"
+  "$CMD" "$@"
+done
