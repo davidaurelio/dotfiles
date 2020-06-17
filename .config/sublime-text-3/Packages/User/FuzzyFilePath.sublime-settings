@@ -1,0 +1,15 @@
+{
+  "additional_scopes": [
+    {
+      // C/C++ Headers
+      "scope": "\\bstring\\.quoted\\.(double|other\\.lt-gt)\\.include\\.",
+      // "prefix": ["#include", "#import"],
+      "auto": true,
+      "relative": false,
+      "extensions": ["h"],
+      "replace_on_insert": [
+        [".*/(public|include)/", ""],
+      ]
+    },
+  ],
+}
