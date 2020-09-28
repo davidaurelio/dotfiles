@@ -22,3 +22,4 @@
 	root = rev-parse --show-toplevel
 	exec = "!exec "
 	wtstat = each-worktree --header status --short --branch
+	grph = log --graph --abbrev-commit  --format='%C(auto)%h%d %C(cyan)%ad%n%s %C(dim)-- %an <%ae>'
