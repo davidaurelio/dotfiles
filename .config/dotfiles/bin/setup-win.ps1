@@ -57,3 +57,6 @@ Function Link-Profile($psProfile) {
 
 Link-Profile $(pwsh -NoProfile -c 'echo $PROFILE')
 Link-Profile $(PowerShell -NoProfile -c 'echo $PROFILE')
+
+# Install pwsh extensions
+Install-Module -Force PSReadLine
