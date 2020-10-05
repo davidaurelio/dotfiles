@@ -45,6 +45,7 @@
 		"SublimeLinter-flow",
 		"SublimeLinter-javac",
 		"SublimeLinter-json",
+		"SublimeLinter-shellcheck",
 		"TOML",
 		"TypeScript",
 		"Unicode Escape",
