@@ -1,0 +1,4 @@
+[credential]
+  helper = wincred
+[include]
+  path = .gitconfig.win.local
