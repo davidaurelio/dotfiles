@@ -5,8 +5,6 @@
   precomposeUnicode = true
 [apply]
   whitespace = nowarn
-[credential]
-  helper = osxkeychain
 [push]
   default = current
 [mergetool]
