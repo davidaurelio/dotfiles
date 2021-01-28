@@ -1,3 +1,7 @@
+Import-Module posh-git
+Import-Module PSReadLine
+
+
 function dotfiles { git --git-dir=$HOME/.dotfiles --work-tree=$HOME $args }
 
 # include local configuration
@@ -34,6 +38,11 @@ function prompt() {
     $gitRef = git symbolic-ref --quiet --short HEAD
     if ("$gitRef" -ne '') {
       $gitHead = $gitRef
+    } else {
+      $gitTag = git describe --tags --exact-match
+      if ("$gitTag" -ne '') {
+        $gitHead = "$gitTag"
+      }
     }
     Write-Host -NoNewline -ForegroundColor DarkYellow "($gitHead) "
   }
