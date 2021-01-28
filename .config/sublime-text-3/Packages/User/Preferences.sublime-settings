@@ -29,7 +29,7 @@
 		"ActualVim",
 		"FlowType",
 		"Rust",
-		"Vintage"
+		"SublimeLinter-flow"
 	],
 	"line_padding_bottom": 0,
 	"line_padding_top": 0,
