@@ -1,19 +1,26 @@
 #!/bin/bash
 
-set -eu -o pipefail
+set -u -o pipefail
 
-CHILDREN=($(git rev-list --all --not  HEAD^@ --children \
-            | grep "^$(git rev-parse HEAD)"))
+CHILDREN=($(
+  git branch --format='%(refname:short)' --contains=HEAD --no-merged \
+  | git rev-list --stdin --not HEAD^@ --children \
+  | grep --max-count=1 "^$(git rev-parse HEAD)"))
 
-case ${#CHILDREN[@]}
+set -e
+
+NUM_CHILDREN=$(( ${#CHILDREN[@]} - 1 ))
+case $NUM_CHILDREN
 in
-  0 | 1)
+  0 | -1)
     echo "Commit has no children" >&2
-    exit 2;;
-  2)
+    exit 1;;
+  1)
     git-canonical --checkout "${CHILDREN[1]}";;
   *)
-    echo "Commit has multiple children: " >&2
-    git show --oneline --no-patch ${CHILDREN[@]:1} >&2
-    exit 1;;
+    echo "Commit has ${NUM_CHILDREN} children, select one: " >&2
+    git show --format='%h %s' --no-patch "${CHILDREN[@]:1}" \
+    | fzf --cycle --height=$(( NUM_CHILDREN + 2 )) \
+    | cut -d' ' -f1 \
+    | git-canonical --checkout
 esac
