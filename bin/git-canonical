@@ -2,8 +2,12 @@
 
 set -eu -o pipefail
 
-CMD=echo
+CMD="echo"
 COMMIT=
+if [[ -p /dev/stdin || -s /dev/stdin ]]; then
+  read -r COMMIT
+fi
+
 
 while (( $# )); do
   case "$1" in
@@ -22,7 +26,7 @@ while (( $# )); do
   esac
 done
 
-COMMIT="$(git rev-parse ${COMMIT:-"HEAD"})"
+COMMIT="$(git rev-parse "${COMMIT:-HEAD}")"
 
 BRANCH="$(git branch --points-at "$COMMIT" --format '%(refname:short)' \
     | grep -v '^(HEAD detached at [0-9a-f]*)$' \
