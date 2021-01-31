@@ -74,14 +74,15 @@ brew install \
   cmake \
   colordiff \
   direnv \
+  fd \
   fish \
+  fzf \
   git \
   htop \
   jq \
   neovim \
   ripgrep \
   tree \
-  yarn \
   Schniz/tap/fnm
 
 brew tap homebrew/cask-versions

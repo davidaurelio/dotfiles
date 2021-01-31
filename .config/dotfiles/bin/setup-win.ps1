@@ -9,7 +9,8 @@ scoop install `
     cmake `
     curl `
     diffutils `
-    findutils `
+    fd `
+    fzf `
     git `
     jq `
     neovim `
@@ -18,13 +19,11 @@ scoop install `
     pwsh `
     ripgrep `
     vim `
-    which `
-    yarn
+    which
 
 scoop bucket add extras
 
 scoop install `
-    firefox `
     sublime-text `
     windows-terminal
 
