@@ -23,6 +23,7 @@
 	exec = "!exec "
 	wtstat = each-worktree --header status --short --branch
 	grph = log --graph --abbrev-commit  --format='%C(auto)%h%d %C(cyan)%ad%n%s %C(dim)-- %an <%ae>'
-	sw = !git switch "$(git branch "$@" --list --format '%(refname:short)' | fzf)"
+	sw = "!git switch \"$(git branch \"$@\" --list --format '%(refname:short)' | fzf)\" #"
+	pr = "!git fetch \"${2:-$(git remote | head -n1)}\" \"pull/$1/head:pull/$1\" && git switch \"pull/$1\" #"
 [init]
 	defaultBranch = main
