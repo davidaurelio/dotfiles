@@ -14,7 +14,7 @@ cat cat ~/.paths ~/.paths.local 2> /dev/null \
 end
 
 # enable fnm
-type -q fnm; and fnm env --shell=fish --multi | source
+type -q fnm; and fnm env --shell=fish | source
 
 # enable direnv. We prefer a custom `--on-variable PWD` hook
 type -q direnv
