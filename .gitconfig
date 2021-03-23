@@ -27,3 +27,5 @@
 	pr = "!git fetch \"${2:-$(git remote | head -n1)}\" \"pull/$1/head:pull/$1\" && git switch \"pull/$1\" #"
 [init]
 	defaultBranch = main
+[format]
+	pretty = %C(auto)%h %C(cyan)%ai%C(auto)%d %C(dim normal)-- %an <%ae>%Creset%n%s%n
