@@ -39,7 +39,7 @@
         "eslint": {
             "disable": false,
             "args": [],
-            "excludes": ["*.ejs"]
+            "excludes": ["*.ejs", "*.sublime-project"]
         },
         "flow": {
             "disable": false,
