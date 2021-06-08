@@ -13,7 +13,6 @@ scoop install `
     fzf `
     git `
     jq `
-    neovim `
     nvm `
     openssh `
     pwsh `
@@ -24,8 +23,7 @@ scoop install `
 scoop bucket add extras
 
 scoop install `
-    sublime-text `
-    windows-terminal
+    sublime-text
 
 # clone dotfiles
 if (!(Test-Path $HOME/.dotfiles/ -PathType Container)) {
