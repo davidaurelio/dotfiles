@@ -14,11 +14,9 @@ scoop install `
     git `
     jq `
     nvm `
-    openssh `
     pwsh `
     ripgrep `
-    vim `
-    which
+    vim
 
 scoop bucket add extras
 
@@ -28,6 +26,7 @@ scoop install `
 # clone dotfiles
 if (!(Test-Path $HOME/.dotfiles/ -PathType Container)) {
     git clone --bare git@github.com:davidaurelio/dotfiles.git $HOME/.dotfiles
+    git --git-dir=$HOME/.dotfiles --work-tree=$HOME config --local status.showUntrackedFiles no
     git --git-dir=$HOME/.dotfiles --work-tree=$HOME checkout
 }
 
@@ -56,4 +55,5 @@ Link-Profile $(pwsh -NoProfile -c 'echo $PROFILE')
 Link-Profile $(PowerShell -NoProfile -c 'echo $PROFILE')
 
 # Install pwsh extensions
-Install-Module -Force PSReadLine
+Install-Module -Force -Scope CurrentUser PSReadLine
+Install-Module -Force -Scope CurrentUser posh-git
