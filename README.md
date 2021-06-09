@@ -23,7 +23,7 @@ dotfiles checkout
 In PowerShell
 ```pwsh
 # run install script
-iwr -useb https://raw.githubusercontent.com/davidaurelio/dotfiles/master/.config/dotfiles/bin/setup-win.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/davidaurelio/dotfiles/main/.config/dotfiles/bin/setup-win.ps1 | iex
 ```
 
 Errors?
