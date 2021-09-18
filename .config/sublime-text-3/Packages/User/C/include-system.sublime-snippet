@@ -1,6 +1,0 @@
-<snippet>
-    <content><![CDATA[#include <${1:}.h>]]></content>
-    <tabTrigger>incs</tabTrigger>
-    <scope>source.c, source.c++</scope>
-    <description>Include system file</description>
-</snippet>

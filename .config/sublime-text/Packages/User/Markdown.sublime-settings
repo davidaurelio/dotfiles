@@ -1,0 +1,5 @@
+{
+    "trim_trailing_white_space_on_save": "none",
+    "wrap_width": 80,
+    "word_wrap": true,
+}

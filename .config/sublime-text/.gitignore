@@ -1,0 +1,6 @@
+/Installed Packages/
+/Local/
+/Packages/*/
+!/Packages/Default/
+!/Packages/User/
+/Packages/User/Package Control.user-ca-bundle

@@ -1,8 +1,0 @@
-<snippet>
-    <content><![CDATA[describe('${1:group description}:', () => {
-  ${0:}
-});]]></content>
-    <tabTrigger>desc</tabTrigger>
-    <scope>source.js</scope>
-    <description>BDD Description</description>
-</snippet>

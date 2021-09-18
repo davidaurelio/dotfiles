@@ -1,0 +1,23 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AceJump",
+		"ApacheConf",
+		"Case Conversion",
+		"Clang Format",
+		"CMake",
+		"EditorConfig",
+		"EJS 2",
+		"fish",
+		"INI",
+		"SublimeLinter",
+		"SublimeLinter-clang",
+		"SublimeLinter-json",
+		"SublimeLinter-shellcheck",
+		"TOML",
+	],
+}

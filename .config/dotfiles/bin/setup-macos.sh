@@ -60,7 +60,7 @@ defaults write -globalDomain WebAutomaticSpellingCorrectionEnabled -bool false
 # Configuration
 defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "$HOME/.config/dotfiles/Library/Preferences"
 defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true
-safelink_config sublime-text-3 "Application Support/Sublime Text 3"
+safelink_config sublime-text "Application Support/Sublime Text"
 safelink_library "Application Support/ControllerMate"
 
 # Install homebrew

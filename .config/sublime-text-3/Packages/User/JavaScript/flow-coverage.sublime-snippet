@@ -1,6 +1,0 @@
-<snippet>
-    <content><![CDATA[// [SublimeLinter flow-coverage: True]]]></content>
-    <tabTrigger>flow-coverage</tabTrigger>
-    <scope>source.js</scope>
-    <description>Function</description>
-</snippet>

@@ -1,6 +1,0 @@
-<snippet>
-    <content><![CDATA[expect(${1:}).${2:}to${3:Equal}(${4:});]]></content>
-    <tabTrigger>ex</tabTrigger>
-    <scope>source.js</scope>
-    <description>BDD Expectation</description>
-</snippet>

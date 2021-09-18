@@ -1,0 +1,41 @@
+{
+	"theme": "Adaptive.sublime-theme",
+
+	"color_scheme": "auto",
+	"light_color_scheme": "Celeste.sublime-color-scheme",
+	"dark_color_scheme": "Mariana.sublime-color-scheme",
+
+	"font_face": "PragmataPro Liga",
+	"font_size": 16,
+	"font_options": [
+		"dlig",
+	],
+
+	"rulers": [80, 100, 120],
+	"tab_size": 2,
+	"highlight_line": true,
+	"draw_white_space": [
+		"selection",
+		"trailing",
+		"isolated",
+	],
+
+	"trim_trailing_white_space_on_save": "all",
+	"ensure_newline_at_eof_on_save": true,
+
+	"tab_completion": false,
+	"shift_tab_unindent": true,
+	"copy_with_empty_selection": false,
+
+	"find_selected_text": false,
+
+	"show_git_status_in_status_bar": false,
+
+	"vintage_use_clipboard": true,
+	"ignored_packages": [
+	],
+
+	// For testing color scheme:
+	"highlight_modified_tabs": true,
+	"draw_minimap_border": true,
+}
