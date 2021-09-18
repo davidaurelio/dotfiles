@@ -21,7 +21,8 @@ safelink () {
 
   # Back up any existing configuration.
   if [[ -e "$CONFIG" ]]; then
-    local BACKUP="$CONFIG.dotfiles-backup.$(date '+%Y%m%d-%H%M%S')"
+    local BACKUP
+    BACKUP="$CONFIG.dotfiles-backup.$(date '+%Y%m%d-%H%M%S')"
     mv "$CONFIG" "$BACKUP"
     debug_msg "Backed up $CONFIG to $BACKUP"
   fi
@@ -57,7 +58,7 @@ defaults write -globalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 defaults write -globalDomain WebAutomaticSpellingCorrectionEnabled -bool false
 
 # Configuration
-defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "~/.config/dotfiles/Library/Preferences"
+defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "$HOME/.config/dotfiles/Library/Preferences"
 defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true
 safelink_config sublime-text-3 "Application Support/Sublime Text 3"
 safelink_library "Application Support/ControllerMate"
@@ -76,14 +77,13 @@ brew install \
   direnv \
   fd \
   fish \
+  fnm \
   fzf \
   git \
   htop \
   jq \
-  neovim \
   ripgrep \
-  tree \
-  Schniz/tap/fnm
+  tree
 
 brew tap homebrew/cask-versions
 brew cask install \
