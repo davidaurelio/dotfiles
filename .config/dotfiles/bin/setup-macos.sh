@@ -85,8 +85,7 @@ brew install \
   ripgrep \
   tree
 
-brew tap homebrew/cask-versions
-brew cask install \
+brew install \
   dash4 \
   firefox \
   gitup \
