@@ -16,10 +16,12 @@
 		"INI",
 		"JsPrettier",
 		"Package Control",
+		"SideBarTools",
 		"SublimeLinter",
 		"SublimeLinter-clang",
 		"SublimeLinter-json",
 		"SublimeLinter-shellcheck",
 		"TOML",
+		"TypeScript",
 	],
 }

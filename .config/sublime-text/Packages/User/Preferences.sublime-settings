@@ -6,7 +6,7 @@
 	"dark_color_scheme": "Mariana.sublime-color-scheme",
 
 	"font_face": "PragmataPro Liga",
-	"font_size": 16,
+	"font_size": 18,
 	"font_options": [
 		"dlig",
 	],
@@ -31,6 +31,10 @@
 	"find_selected_text": false,
 
 	"show_git_status_in_status_bar": false,
+	"show_encoding": true,
+	"show_full_path": true,
+	"show_rel_path": true,
+	"show_project_first": true,
 
 	"vintage_use_clipboard": true,
 	"ignored_packages": [
