@@ -1,3 +1,5 @@
 {
   "font_size": 18,
+  "close_windows_when_empty": true,
+  "hardware_acceleration": "opengl",
 }

@@ -35,6 +35,8 @@
 	"show_rel_path": true,
 	"show_project_first": true,
 
+	"scroll_past_end": false,
+
 	"vintage_use_clipboard": true,
 	"ignored_packages": [
 	],
