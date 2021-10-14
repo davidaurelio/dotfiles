@@ -1,0 +1,7 @@
+use_fnm() {
+  local node_version=$1
+
+  set -e
+  type -fP fnm
+  fnm use
+}
