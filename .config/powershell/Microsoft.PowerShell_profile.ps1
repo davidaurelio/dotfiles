@@ -50,3 +50,18 @@ function prompt() {
 
   return " "
 }
+
+function subl-proj {
+  $projectsDir = "$HOME\.sublime-projects"
+  if ($args.Count -gt 0) {
+    $project = $args[0]
+  } else {
+    $project = (Get-Item "$projectsDir\*.sublime-project" |% { $_.Name } | fzf --height=10)
+  }
+
+  if (!$project.endsWith(".sublime-project")) {
+    $project += ".sublime-project"
+  }
+
+  New-Item -Type SymbolicLink -Target "$projectsDir\$project" -Path "$project"
+}
