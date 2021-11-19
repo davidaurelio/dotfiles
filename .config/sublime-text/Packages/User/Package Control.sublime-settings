@@ -24,4 +24,5 @@
 		"TOML",
 		"TypeScript",
 	],
+	"ignore_vcs_packages": true,
 }

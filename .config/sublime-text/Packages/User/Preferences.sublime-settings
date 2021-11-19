@@ -24,6 +24,7 @@
 	"ensure_newline_at_eof_on_save": true,
 
 	"tab_completion": false,
+	"auto_complete_commit_on_tab": true,
 	"shift_tab_unindent": true,
 	"copy_with_empty_selection": false,
 
