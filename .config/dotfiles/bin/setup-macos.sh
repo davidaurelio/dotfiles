@@ -88,12 +88,12 @@ brew install \
   shfmt \
   tree
 
-brew install \
-  dash4 \
-  firefox \
-  gitup \
-  google-chrome \
-  iterm2 \
-  sublime-text \
-  suspicious-package \
-  the-unarchiver
+# brew install \
+#   dash4 \
+#   firefox \
+#   gitup \
+#   google-chrome \
+#   iterm2 \
+#   sublime-text \
+#   suspicious-package \
+#   the-unarchiver
