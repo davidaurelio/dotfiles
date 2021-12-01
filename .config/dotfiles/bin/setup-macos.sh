@@ -71,6 +71,7 @@ fi
 set +e
 
 brew install \
+  cdecl \
   cmake \
   colordiff \
   direnv \
@@ -81,7 +82,10 @@ brew install \
   git \
   htop \
   jq \
+  lazygit \
   ripgrep \
+  shellcheck \
+  shfmt \
   tree
 
 brew install \
