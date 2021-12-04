@@ -1,2 +1,4 @@
 ~/bin
+/opt/homebrew/bin
+/opt/homebrew/sbin
 /usr/local/sbin
