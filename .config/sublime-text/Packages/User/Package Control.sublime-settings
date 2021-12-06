@@ -16,6 +16,8 @@
 		"INI",
 		"JsPrettier",
 		"Package Control",
+		"Rust Enhanced",
+		"RustFmt",
 		"SideBarTools",
 		"SublimeLinter",
 		"SublimeLinter-clang",

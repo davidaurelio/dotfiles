@@ -38,7 +38,9 @@
 
 	"scroll_past_end": false,
 
+
 	"ignored_packages": [
+		"Rust",
 	],
 
 	// For testing color scheme:
