@@ -38,6 +38,7 @@
 
 	"scroll_past_end": false,
 
+	"shell_environment": true,
 
 	"ignored_packages": [
 		"Rust",
