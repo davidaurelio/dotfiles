@@ -1,5 +1,5 @@
 {
     "style": "File",
     "languages": ["C", "C++", "C++11", "Objective-C", "Objective-C++"],
-    "binary": "/Users/david/bin/clang-format",
+    "binary": "clang-format",
 }
