@@ -1,0 +1,8 @@
+// Settings in here override those in "LSP/LSP.sublime-settings"
+{
+   // Show inlay hints in the editor. Inlay hints are short annotations within the code, which show variable types or parameter names.
+  "show_inlay_hints": true,
+
+  // The maximum number of characters (approximately) before wrapping in the popup.
+  "popup_max_characters_width": 100,
+}
