@@ -16,6 +16,7 @@
 		"INI",
 		"JsPrettier",
 		"LSP",
+		"LSP-rust-analyzer",
 		"LSP-typescript",
 		"Package Control",
 		"Rust Enhanced",

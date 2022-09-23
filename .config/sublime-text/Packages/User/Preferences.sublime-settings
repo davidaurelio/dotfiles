@@ -41,7 +41,7 @@
 	"shell_environment": true,
 
 	"ignored_packages": [
-		"Rust",
+		"Rust Enhanced",
 	],
 
 	// For testing color scheme:
