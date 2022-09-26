@@ -1,0 +1,14 @@
+// Settings in here override those in "LSP-typescript/LSP-typescript.sublime-settings"
+
+{
+  "settings": {
+    // "typescript.inlayHints.includeInlayEnumMemberValueHints": false,
+    "typescript.inlayHints.includeInlayFunctionLikeReturnTypeHints": true,
+    "typescript.inlayHints.includeInlayFunctionParameterTypeHints": true,
+    "typescript.inlayHints.includeInlayParameterNameHints": "literals", // none | literals | all
+    // "typescript.inlayHints.includeInlayParameterNameHintsWhenArgumentMatchesName": false,
+    "typescript.inlayHints.includeInlayPropertyDeclarationTypeHints": true,
+    "typescript.inlayHints.includeInlayVariableTypeHints": true,
+    // "typescript.inlayHints.includeInlayVariableTypeHintsWhenTypeMatchesName": false,
+  }
+}
