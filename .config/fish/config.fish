@@ -1,3 +1,5 @@
+source ~/.config/fish/colors.fish
+
 test -f ~/.aliases; and . ~/.aliases
 test -f ~/.aliases.local; and . ~/.aliases.local
 
