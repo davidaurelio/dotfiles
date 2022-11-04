@@ -12,11 +12,7 @@ syntax on
 
 let g:os = substitute(system('uname'), '\n', '', '')
 
-if g:os == "Darwin" || g:os == "Linux"
-    set termguicolors
-    set background=light
-    colorscheme solarized
-elseif has('vcon')
+if g:os == "Darwin" || g:os == "Linux" || has('vcon')
     set termguicolors
 endif
 
