@@ -1,0 +1,5 @@
+gui:
+  theme:
+    lightTheme: true
+    inactiveBorderColor:
+    - default
