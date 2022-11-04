@@ -1,3 +1,4 @@
+set_gui_appearance_var
 source ~/.config/fish/colors.fish
 
 test -f ~/.aliases; and . ~/.aliases
