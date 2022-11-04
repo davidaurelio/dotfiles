@@ -1,7 +1,7 @@
 # Colours
 set -U fish_color_autosuggestion --dim
 set -U fish_color_cancel --reverse
-set -U fish_color_command blue
+set -U fish_color_command blue --bold
 set -U fish_color_comment brcyan --dim
 set -U fish_color_cwd blue
 set -U fish_color_cwd_root magenta
@@ -23,8 +23,8 @@ set -U fish_color_status red
 set -U fish_color_user brgreen
 set -U fish_color_valid_path --underline
 # Pager
-set -U fish_pager_color_completion brgeen --bold
-set -U fish_pager_color_description bryellow --dim
+set -U fish_pager_color_completion cyan --bold
+set -U fish_pager_color_description green
 set -U fish_pager_color_prefix normal --bold --underline
 set -U fish_pager_color_progress blue --dim
 set -U fish_pager_color_selected_background --reverse
