@@ -26,6 +26,6 @@ function fish_prompt_real
         (vcs_tip '(%s)') \
         (set_color $color_cwd) \
         (prompt_pwd) \
-        (set_color normal) "$suffix "
-
+        (set_color normal) (set_color --italics) "$suffix " \
+        (set_color normal)
 end
