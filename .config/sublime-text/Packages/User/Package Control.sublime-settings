@@ -16,6 +16,8 @@
 		"INI",
 		"JsPrettier",
 		"LSP",
+		"LSP-eslint",
+		"LSP-file-watcher-chokidar",
 		"LSP-rust-analyzer",
 		"LSP-typescript",
 		"Package Control",

@@ -42,6 +42,7 @@
 
 	"ignored_packages": [
 		"Rust Enhanced",
+		"SublimeLinter-eslint",
 	],
 
 	// For testing color scheme:
