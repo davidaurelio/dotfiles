@@ -32,3 +32,6 @@
 	pretty = %C(auto)%h %C(cyan)%ai%C(auto)%d %C(dim normal)-- %an <%ae>%Creset%n%s%n
 [advice]
 	skippedCherryPicks = false
+[fetch]
+	prune = true
+	pruneTags = true
