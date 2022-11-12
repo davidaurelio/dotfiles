@@ -1195,7 +1195,7 @@
 			<key>Load Shell Integration Automatically</key>
 			<true/>
 			<key>Minimum Contrast (Dark)</key>
-			<real>0.0</real>
+			<real>0.14999999999999999</real>
 			<key>Minimum Contrast (Light)</key>
 			<real>0.0</real>
 			<key>Mouse Reporting</key>
