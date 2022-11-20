@@ -14,7 +14,7 @@ in
   *)
     NUM_PARENTS=${#PARENTS[@]}
     echo "Commit has ${NUM_PARENTS} parents, select one: " >&2
-    git show --format='%h %s' --no-patch "${PARENTS[@]}" \
+    git show --format='%h%d %s' --no-patch "${PARENTS[@]}" \
     | fzf --cycle --height=$(( NUM_PARENTS + 2 )) \
     | cut -d' ' -f1 \
     | git-canonical --checkout
