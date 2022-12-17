@@ -1,0 +1,50 @@
+[
+  // Trigger LSP Signature Help
+  {
+    "command": "lsp_signature_help_show",
+    "keys": [
+      "ctrl+shift+space"
+    ],
+    "context": [
+      {
+        "key": "lsp.signature_help_available",
+        "operator": "equal",
+        "operand": true
+      }
+    ]
+  },
+
+  // Accept Copilot suggestion
+  {
+    "keys": ["primary+enter"],
+    "command": "copilot_accept_completion",
+    "context": [
+      {
+        "key": "setting.copilot.completion.is_visible"
+      }
+    ]
+  },
+
+    // Goto Definition
+    // {
+    //     "command": "lsp_symbol_definition",
+    //     "args": {
+    //         "side_by_side": false
+    //     },
+    //     "keys": [
+    //         "f12"
+    //     ],
+    //     "context": [
+    //         {
+    //             "key": "lsp.session_with_capability",
+    //             "operator": "equal",
+    //             "operand": "definitionProvider"
+    //         },
+    //         {
+    //             "key": "auto_complete_visible",
+    //             "operator": "equal",
+    //             "operand": false
+    //         }
+    //     ]
+    // },
+]
