@@ -14,6 +14,52 @@
     ]
   },
 
+
+  // {
+  //   "keys": ["tab"], "command": "copilot_accept_completion", "context": [
+  //     {
+  //       "key": "copilot.is_on_completion",
+  //       "operator": "equal",
+  //       "operand": false
+  //     }
+  //   ]
+  // },
+  { "keys": ["tab"], "command": "auto_complete", "args": {"snippets_only": true, "default": "\t", "commit_single": true},
+    "context":
+    [
+      { "key": "auto_complete_visible", "operand": false },
+      { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+      { "key": "setting.tab_completion", "operator": "equal", "operand": false },
+      { "key": "preceding_text", "operator": "regex_match", "operand": ".*\\w", "match_all": true },
+    ]
+  },
+
+  { "keys": ["tab"], "command": "expand_snippet", "context":
+    [{ "key": "has_snippet" }, ]
+  },
+  { "keys": ["tab"], "command": "reindent", "context":
+    [
+      { "key": "setting.auto_indent", "operator": "equal", "operand": true },
+      { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+      { "key": "preceding_text", "operator": "regex_match", "operand": "^$", "match_all": true },
+      { "key": "following_text", "operator": "regex_match", "operand": "^$", "match_all": true }
+    ]
+  },
+  { "keys": ["tab"], "command": "indent", "context":
+    [{ "key": "text", "operator": "regex_contains", "operand": "\n" } ]
+  },
+  { "keys": ["tab"], "command": "move", "args": {"by": "lines", "forward": true}, "context":
+    [
+      { "key": "overlay_has_focus", "operator": "equal", "operand": true }
+    ]
+  },
+  { "keys": ["tab"], "command": "next_field", "context":
+    [{ "key": "has_next_field", "operator": "equal", "operand": true }]
+  },
+  { "keys": ["tab"], "command": "commit_completion", "context":
+    [{ "key": "auto_complete_visible" }, ]
+  },
+
   // Accept Copilot suggestion
   {
     "keys": ["primary+enter"],
@@ -24,6 +70,13 @@
       }
     ]
   },
+  // {
+  //   "keys": ["tab"],
+  //   "command": "copilot_accept_completion",
+  //   "context": [
+  //     { "key": "copilot.is_on_completion", "operator": "equal", "operand": false}
+  //   ]
+  // },
 
     // Goto Definition
     // {
