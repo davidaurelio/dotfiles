@@ -1,15 +1,58 @@
-﻿---
-Language: Cpp
-BasedOnStyle: Chromium
+---
+Language:        Cpp
+BasedOnStyle:  LLVM
 AccessModifierOffset: -2
-AlignAfterOpenBracket: AlwaysBreak
-AlignOperands: false
-AlignTrailingComments: false
-AllowAllArgumentsOnNextLine: false
-AllowAllConstructorInitializersOnNextLine: false
-AllowShortBlocksOnASingleLine: Always
-AllowShortIfStatementsOnASingleLine: WithoutElse
-BinPackArguments: false
-SpacesInContainerLiterals: false
+AlignAfterOpenBracket: BlockIndent
+AlignArrayOfStructures: Right
 
+AlignOperands:   DontAlign
+AlignTrailingComments:
+  Kind:            Never
+
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortLoopsOnASingleLine: true
+AlwaysBreakBeforeMultilineStrings: true
+AlwaysBreakTemplateDeclarations: Yes
+AttributeMacros:
+  - SPL_LIKELY
+BinPackArguments: false
+BinPackParameters: false
+BitFieldColonSpacing: After
+BreakConstructorInitializers: AfterColon
+BreakInheritanceList: AfterColon
+ContinuationIndentWidth: 2
+IncludeBlocks:   Regroup
+IncludeCategories:
+  - Regex:           '^<[[:alnum:]]+>$'
+    Priority:        2
+    SortPriority:    0
+    CaseSensitive:   true
+  - Regex:           '^<[[:alnum:]]+\.h>$'
+    Priority:        3
+    SortPriority:    0
+    CaseSensitive:   true
+  - Regex:           '^<boost/'
+    Priority:        4
+    SortPriority:    0
+    CaseSensitive:   true
+IncludeIsMainRegex: '(-test|-inline)?$'
+IndentCaseLabels: true
+IndentExternBlock: NoIndent
+IndentGotoLabels: false
+IndentPPDirectives: BeforeHash
+InsertTrailingCommas: Wrapped
+IntegerLiteralSeparator:
+  Binary: 8
+  Decimal: 3
+  Hex: 8
+KeepEmptyLinesAtTheStartOfBlocks: false
+PackConstructorInitializers: CurrentLine
+PPIndentWidth:   -1
+QualifierAlignment: Right
+ReflowComments:  false
+SpacesBeforeTrailingComments: 2
+TabWidth:        2
 ...
+
