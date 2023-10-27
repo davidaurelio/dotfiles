@@ -11,7 +11,7 @@ cat ~/.env{,.local} 2> /dev/null | while read -d= N V
 end
 
 # append to path
-cat cat ~/.paths ~/.paths.local 2> /dev/null \
+cat ~/.paths ~/.paths.local 2> /dev/null \
 | while read P
   set -a PATH (eval echo $P | string join " ")
 end
