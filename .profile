@@ -8,10 +8,9 @@ fi
 alias ls='ls -G'
 
 # set env vars
-cat ~/.env ~/.env.local 2> /dev/null \
-| while IFS== read -r N V; do
+while IFS== read -r N V; do
   export $N="`eval echo $V`"
-done
+done < <(cat ~/.env ~/.env.local 2> /dev/null )
 
 # append to path
 while read -r P; do
