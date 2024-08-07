@@ -3,5 +3,6 @@
   "initializationOptions": {
     "clangd.clang-tidy": true,
     "clangd.header-insertion": "iwyu",
+    "clangd.pretty": true
   }
 }

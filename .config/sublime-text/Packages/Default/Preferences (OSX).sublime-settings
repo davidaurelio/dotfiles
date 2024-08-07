@@ -3,4 +3,5 @@
   "close_windows_when_empty": true,
   "hardware_acceleration": "opengl",
   "shell_environment": true,
+  "open_files_in_new_window": "finder_only",
 }
