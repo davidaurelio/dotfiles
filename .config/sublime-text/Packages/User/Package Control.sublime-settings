@@ -7,6 +7,7 @@
 	[
 		"AceJump",
 		"ApacheConf",
+		"ayu",
 		"Case Conversion",
 		"Clang Format",
 		"CMake",
@@ -27,6 +28,7 @@
 		"LSP-ruff",
 		"LSP-rust-analyzer",
 		"LSP-typescript",
+		"OpenAI completion",
 		"Package Control",
 		"python-black",
 		"Rust Enhanced",

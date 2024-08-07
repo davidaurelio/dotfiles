@@ -1,6 +1,8 @@
 // Settings in here override those in "LSP-clangd/LSP-clangd.sublime-settings"
 {
   "initializationOptions": {
+    "fallbackFlags": ["-xc++", "-std=c++20"],
+    "clangd.background-index": true,
     "clangd.clang-tidy": true,
     "clangd.header-insertion": "iwyu",
     "clangd.pretty": true
