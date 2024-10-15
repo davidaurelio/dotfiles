@@ -1,0 +1,8 @@
+{
+	"extensions":
+	[
+		"BUCK",
+		"BUCK.v2",
+		"prelude_bazel",
+	],
+}
