@@ -2,8 +2,8 @@
 	"theme": "Adaptive.sublime-theme",
 
 	"color_scheme": "auto",
-	"light_color_scheme": "Breakers.sublime-color-scheme",
-	"dark_color_scheme": "Mariana.sublime-color-scheme",
+	"light_color_scheme": "ayu-light.sublime-color-scheme",
+	"dark_color_scheme": "ayu-mirage.sublime-color-scheme",
 
 	"font_face": "PragmataPro Liga",
 	"font_options": [
@@ -52,4 +52,6 @@
 	// For testing color scheme:
 	"highlight_modified_tabs": true,
 	"draw_minimap_border": true,
+	"font_size": 18,
+	"index_files": false,
 }
