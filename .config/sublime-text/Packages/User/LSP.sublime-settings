@@ -7,6 +7,6 @@
   "popup_max_characters_width": 100,
 
   "lsp_code_actions_on_save": {
-    "source.organizeImports": true,
+    "source.organizeImports": false,
   }
 }

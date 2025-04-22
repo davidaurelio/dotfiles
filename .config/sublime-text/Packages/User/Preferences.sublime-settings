@@ -52,6 +52,6 @@
 	// For testing color scheme:
 	"highlight_modified_tabs": true,
 	"draw_minimap_border": true,
-	"font_size": 18,
+	"font_size": 20,
 	"index_files": false,
 }
