@@ -29,9 +29,9 @@
 	wtstat = each-worktree --header status --short --branch
 	grph = log --graph --abbrev-commit  --format='%C(auto)%h%d %C(cyan)%ad%n%s %C(dim)-- %an <%ae>'
 	sw = "!BRANCH=\"$(git branch \"$@\" --list --format '%(refname:short)' | fzf)\" && git switch \"$BRANCH\" #"
-	pr = "!git fetch \"${2:-$(git remote | head -n1)}\" \"pull/$1/head:pull/$1\" && git switch --track \"pull/$1\" #"
+	pr = "!git fetch \"${2:-$(git remote | head -n1)}\" \"pull/$1/head:pull/$1\" && git switch \"pull/$1\" #"
 	stale = "!git for-each-ref --format='%(upstream:track) %(refname:short)' refs/heads/ | rg '^\\[gone\\] ' | cut -c8- | rg -v '^main$' #"
-	rm-stale = "!git stale | fzf --multi | xargs git branch -D #"
+	rm-stale = "!git stale | fzf --multi --exit-0 | xargs git branch -D #"
 [init]
 	defaultBranch = main
 [format]

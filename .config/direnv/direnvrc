@@ -1,3 +1,7 @@
 use_fnm() {
   fnm use --install-if-missing "$@"
 }
+
+use_conda() {
+  conda activate "$@"
+}
