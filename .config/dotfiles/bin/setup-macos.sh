@@ -83,10 +83,12 @@ brew install \
   htop \
   jq \
   lazygit \
+  pnpm \
   ripgrep \
   shellcheck \
   shfmt \
-  tree
+  tree \
+  uv
 
 # brew install \
 #   dash4 \
