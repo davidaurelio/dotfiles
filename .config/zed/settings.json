@@ -35,5 +35,17 @@
   "cursor_blink": false,
   "tabs": {
     "close_position": "left"
+  },
+  "auto_install_extensions": {
+    "crates-lsp": true,
+    "html": true,
+    "jinja2": true,
+    "oxc": true,
+    "oxlint": true,
+    "proto": true,
+    "solarized": true,
+    "starlark": true,
+    "sublime-mariana-theme": true,
+    "toml": true
   }
 }
