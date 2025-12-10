@@ -1,10 +1,7 @@
 {
 	"bootstrapped": true,
-	"in_process_packages":
-	[
-	],
-	"installed_packages":
-	[
+	"in_process_packages": [],
+	"installed_packages": [
 		"AceJump",
 		"ApacheConf",
 		"ayu",
@@ -19,6 +16,7 @@
 		"GitSavvy",
 		"Highlight",
 		"INI",
+		"Jinja2",
 		"JsPrettier",
 		"LSP",
 		"LSP-clangd",
@@ -26,13 +24,16 @@
 		"LSP-eslint",
 		"LSP-file-watcher-chokidar",
 		"LSP-json",
+		"LSP-marksman",
 		"LSP-pyright",
 		"LSP-ruff",
 		"LSP-rust-analyzer",
+		"LSP-TexLab",
 		"LSP-typescript",
 		"OpenAI completion",
 		"Package Control",
 		"Pretty Shell",
+		"Project Specific Syntax Settings",
 		"Protobuf Syntax Hightlighting",
 		"Rust Enhanced",
 		"RustFmt",
