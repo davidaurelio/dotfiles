@@ -7,34 +7,51 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "agent": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-5.2",
+    },
+    "model_parameters": [],
+  },
   "ui_font_family": ".ZedSans",
   "buffer_line_height": "comfortable",
   "buffer_font_family": "PragmataPro Liga",
   "buffer_font_features": {
     "dlig": true,
-    "ss13": true
+    "ss13": true,
   },
+  "wrap_guides": [79, 88, 100, 120],
+  "show_wrap_guides": true,
   "collaboration_panel": {
-    "button": true
+    "button": true,
   },
   "vim_mode": true,
   "base_keymap": "SublimeText",
   "icon_theme": {
     "mode": "system",
     "light": "Zed (Default)",
-    "dark": "Zed (Default)"
+    "dark": "Zed (Default)",
   },
   "ui_font_size": 16,
   "buffer_font_size": 16.0,
   "theme": {
     "mode": "system",
     "light": "Sublime Breakers",
-    "dark": "Sublime Mariana"
+    "dark": "Sublime Mariana",
+  },
+  "theme_overrides": {
+    "Sublime Breakers": {
+      "editor.wrap_guide": "#e0e0e0",
+    },
   },
   "use_system_path_prompts": false,
   "cursor_blink": false,
   "tabs": {
-    "close_position": "left"
+    "close_position": "left",
+  },
+  "features": {
+    "edit_prediction_provider": "copilot",
   },
   "auto_install_extensions": {
     "crates-lsp": true,
@@ -46,6 +63,6 @@
     "solarized": true,
     "starlark": true,
     "sublime-mariana-theme": true,
-    "toml": true
-  }
+    "toml": true,
+  },
 }
