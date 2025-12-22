@@ -5,11 +5,11 @@ set -eu -o pipefail
 CONFIG=~/.config
 DOTFILES="$CONFIG/dotfiles"
 
-debug_msg () {
+debug_msg() {
   echo "$@" >&2
 }
 
-safelink () {
+safelink() {
   DOTFILE="$1"
   CONFIG="$2"
 
@@ -32,21 +32,21 @@ safelink () {
   ln -Fhis "$DOTFILE" "$CONFIG"
 }
 
-safelink_config () {
+safelink_config() {
   safelink "$CONFIG/$1" ~/Library/"$2"
 }
 
-safelink_library () {
+safelink_library() {
   safelink "$DOTFILES/Library/$1" ~/Library/"$1"
 }
 
 # macos defaults
-defaults write -globalDomain AppleInterfaceStyleSwitchesAutomatically -bool true  ## auto dark mode
-defaults write -globalDomain AppleScrollerPagingBehavior -bool true  ## scroll bar click jump to spot
-defaults write -globalDomain AppleShowScrollBars WhenScrolling  ## show scrollbars when scrolling
+defaults write -globalDomain AppleInterfaceStyleSwitchesAutomatically -bool true ## auto dark mode
+defaults write -globalDomain AppleScrollerPagingBehavior -bool true              ## scroll bar click jump to spot
+defaults write -globalDomain AppleShowScrollBars WhenScrolling                   ## show scrollbars when scrolling
 defaults write -globalDomain KeyRepeat -int 2
 defaults write -globalDomain InitialKeyRepeat -int 15
-defaults write -globalDomain AppleKeyboardUIMode -int 3  ## use tab to focus all controls
+defaults write -globalDomain AppleKeyboardUIMode -int 3 ## use tab to focus all controls
 defaults write -globalDomain com.apple.mouse.scaling -float 3
 defaults write -globalDomain NSCloseAlwaysConfirmsChanges -bool true
 defaults write -globalDomain NSQuitAlwaysKeepsWindows -bool true
@@ -71,6 +71,7 @@ fi
 set +e
 
 brew install \
+  browser \
   cdecl \
   cmake \
   colordiff \
@@ -79,10 +80,13 @@ brew install \
   fish \
   fnm \
   fzf \
+  htop \
   git \
+  gh \
   htop \
   jq \
   lazygit \
+  miniserve \
   pnpm \
   ripgrep \
   shellcheck \
