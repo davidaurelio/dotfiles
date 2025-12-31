@@ -75,6 +75,7 @@ brew install \
   cdecl \
   cmake \
   colordiff \
+  difftastic \
   direnv \
   fd \
   fish \

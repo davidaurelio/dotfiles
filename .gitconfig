@@ -32,6 +32,10 @@
 	pr = "!git fetch \"${2:-$(git remote | head -n1)}\" \"pull/$1/head:pull/$1\" && git switch \"pull/$1\" #"
 	stale = "!git for-each-ref --format='%(upstream:track) %(refname:short)' refs/heads/ | rg '^\\[gone\\] ' | cut -c8- | rg -v '^main$' #"
 	rm-stale = "!git stale | fzf --multi --exit-0 | xargs git branch -D #"
+  # Difftastic aliases, so `git dlog` is `git log` with difftastic and so on.
+  dlog = -c diff.external=difft log --ext-diff
+  dshow = -c diff.external=difft show --ext-diff
+  ddiff = -c diff.external=difft diff
 [init]
 	defaultBranch = main
 [format]
@@ -41,3 +45,11 @@
 [fetch]
 	prune = true
 	pruneTags = true
+[difftool]
+  prompt = false # Run the difftool immediately, don't ask 'are you sure' each time.
+[difftool "difftastic"]
+  cmd = difft "$MERGED" "$LOCAL" "abcdef1" "100644" "$REMOTE" "abcdef2" "100644"
+[diff]
+  tool = difftastic
+[pager]
+  difftool = true # Use a pager if the difftool output is larger than one screenful, consistent with the behaviour of `git diff`.
