@@ -57,6 +57,10 @@
   "features": {
     "edit_prediction_provider": "copilot",
   },
+  "preview_tabs": {
+    "enable_preview_multibuffer_from_code_navigation": true,
+    "enable_keep_preview_on_code_navigation": true,
+  },
   "use_system_path_prompts": false,
   // === Extensions ==========================================================
   "auto_install_extensions": {
