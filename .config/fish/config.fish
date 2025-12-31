@@ -10,11 +10,17 @@ cat ~/.env{,.local} 2> /dev/null | while read -d= N V
   set -xg $N $V
 end
 
-# append to path
+# prepend to path
+set -l EXTRA_PATH
 cat ~/.paths ~/.paths.local 2> /dev/null \
 | while read P
-  set -a PATH (eval echo $P | string join " ")
+  set --append EXTRA_PATH (eval echo $P | string join " ")
 end
+
+if test (count $EXTRA_PATH) -gt 0
+  set --prepend PATH $EXTRA_PATH
+end
+set --erase EXTRA_PATH
 
 # enable fnm
 type -q fnm; and fnm env --shell=fish | source
@@ -40,4 +46,3 @@ and function __update_env_from_tmux --on-event fish_preexec
     set -xg $N $V
   end
 end
-
