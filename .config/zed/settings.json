@@ -56,7 +56,11 @@
     "edit_prediction_provider": "copilot",
   },
   "auto_install_extensions": {
+    "basher": true,
     "crates-lsp": true,
+    "editorconfig": true,
+    "fish": true,
+    "git-firefly": true,
     "html": true,
     "jinja2": true,
     "oxc": true,
@@ -66,5 +70,6 @@
     "starlark": true,
     "sublime-mariana-theme": true,
     "toml": true,
+    "xml": true,
   },
 }
