@@ -1,10 +1,3 @@
-# faster nvm
-export NVM_DIR=~/.nvm
-if [ -d "$NVM_DIR" ]; then
-  source /usr/local/opt/nvm/nvm.sh --no-use
-  nvm use `ls ~/.nvm/versions/node | sed s/^v// | sort  -t. -s -k 1,1rn -k 2,2rn -k3,3rn -k4,4rn | head -n1` --silent
-fi
-
 alias ls='ls -G'
 
 # set env vars
@@ -22,3 +15,7 @@ while read -r P; do
 done < <(cat ~/.paths ~/.paths.local 2>/dev/null)
 test -n "$EXTRA_PATH" && export PATH="$EXTRA_PATH$PATH"
 
+# enable fnm
+if command -v fnm >/dev/null 2>&1; then
+  eval "$(fnm env)"
+fi
