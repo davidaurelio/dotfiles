@@ -7,54 +7,58 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "agent": {
-    "always_allow_tool_actions": true,
-    "default_profile": "write",
-    "default_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-5.2",
-    },
-    "model_parameters": [],
-  },
-  "ui_font_family": ".ZedSans",
-  "buffer_line_height": "comfortable",
+  // === UI/Editor Config ====================================================
+  "base_keymap": "SublimeText",
   "buffer_font_family": "PragmataPro Liga",
   "buffer_font_features": {
     "dlig": true,
     "ss13": true,
   },
-  "wrap_guides": [79, 88, 100, 120],
-  "show_wrap_guides": true,
-  "collaboration_panel": {
-    "button": true,
-  },
-  "vim_mode": true,
-  "base_keymap": "SublimeText",
-  "icon_theme": {
-    "mode": "system",
-    "light": "Zed (Default)",
-    "dark": "Zed (Default)",
-  },
-  "ui_font_size": 16,
   "buffer_font_size": 16.0,
-  "theme": {
+  "buffer_line_height": "comfortable",
+  "cursor_blink": false,
+  "icon_theme": {
+    "dark": "Zed (Default)",
+    "light": "Zed (Default)",
     "mode": "system",
-    "light": "Sublime Breakers",
+  },
+  "show_wrap_guides": true,
+  "tabs": {
+    "close_position": "left",
+  },
+  "theme": {
     "dark": "Sublime Mariana",
+    "light": "Sublime Breakers",
+    "mode": "system",
   },
   "theme_overrides": {
     "Sublime Breakers": {
       "editor.wrap_guide": "#e0e0e0",
     },
   },
-  "use_system_path_prompts": false,
-  "cursor_blink": false,
-  "tabs": {
-    "close_position": "left",
+  "ui_font_family": ".ZedSans",
+  "ui_font_size": 16,
+  "vim_mode": true,
+  "wrap_guides": [79, 88, 100, 120],
+
+  // === Features / AI =======================================================
+  "agent": {
+    "always_allow_tool_actions": true,
+    "default_model": {
+      "model": "gpt-5.2",
+      "provider": "copilot_chat",
+    },
+    "default_profile": "write",
+    "model_parameters": [],
+  },
+  "collaboration_panel": {
+    "button": true,
   },
   "features": {
     "edit_prediction_provider": "copilot",
   },
+  "use_system_path_prompts": false,
+  // === Extensions ==========================================================
   "auto_install_extensions": {
     "basher": true,
     "crates-lsp": true,
@@ -62,6 +66,7 @@
     "fish": true,
     "git-firefly": true,
     "html": true,
+    "java": true,
     "jinja2": true,
     "oxc": true,
     "oxlint": true,
