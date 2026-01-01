@@ -1,3 +1,4 @@
 font-family = PragmataPro Mono
 font-size = 18
+theme = dark:Duskfox,light:Dayfox
 copy-on-select = clipboard

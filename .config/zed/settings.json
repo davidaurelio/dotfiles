@@ -27,8 +27,8 @@
     "close_position": "left",
   },
   "theme": {
-    "dark": "Sublime Mariana",
-    "light": "Sublime Breakers",
+    "dark": "Duskfox - opaque",
+    "light": "Dayfox - opaque",
     "mode": "system",
   },
   "theme_overrides": {
