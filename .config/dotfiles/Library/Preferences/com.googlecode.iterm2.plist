@@ -27,12 +27,6 @@
 	<key>AlwaysOpenWindowAtStartup</key>
 	<true/>
 	<key>AutoHideTmuxClientSession</key>
-	<false/>
-	<key>BracketedPasteMode</key>
-	<true/>
-	<key>CheckTestRelease</key>
-	<true/>
-	<key>ConvertDosNewlines</key>
 	<true/>
 	<key>Custom Color Presets</key>
 	<dict>
@@ -555,14 +549,10 @@
 	<true/>
 	<key>DoubleClickPerformsSmartSelection</key>
 	<true/>
-	<key>EscapeShellCharsWithBackslash</key>
-	<false/>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
-	<key>IRMemory</key>
-	<integer>4</integer>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1730,11 +1720,11 @@
 			<key>Normal Font</key>
 			<string>PragmataProMono-Regular 15</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<integer>2</integer>
 			<key>Right Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Rows</key>
 			<integer>80</integer>
 			<key>Screen</key>
@@ -1813,10 +1803,6 @@
 			<string></string>
 			<key>Show Mark Indicators</key>
 			<false/>
-			<key>Show Offscreen Command line</key>
-			<false/>
-			<key>Show Timestamps</key>
-			<integer>1</integer>
 			<key>Silence Bell</key>
 			<false/>
 			<key>Smart Cursor Color (Dark)</key>
@@ -1833,8 +1819,6 @@
 			<integer>1</integer>
 			<key>Transparency</key>
 			<real>0.0</real>
-			<key>Treat Option as Alt</key>
-			<true/>
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
@@ -1874,14 +1858,6 @@
 		</dict>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
-	<false/>
-	<key>OpenTmuxWindowsIn</key>
-	<integer>2</integer>
-	<key>PasteSpecialRegex</key>
-	<string></string>
-	<key>PasteSpecialSubstitution</key>
-	<string></string>
-	<key>PasteSpecialUseRegexSubstitution</key>
 	<false/>
 	<key>PointerActions</key>
 	<dict>
