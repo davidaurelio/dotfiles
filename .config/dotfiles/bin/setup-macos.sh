@@ -95,19 +95,29 @@ brew install \
   jq \
   lazygit \
   miniserve \
+  mitmproxy \
   pnpm \
   ripgrep \
+  s5cmd \
   shellcheck \
   shfmt \
   tree \
   uv
 
-# brew install \
-#   dash4 \
-#   firefox \
-#   gitup \
-#   google-chrome \
-#   iterm2 \
-#   sublime-text \
-#   suspicious-package \
-#   the-unarchiver
+# Casks
+CASKS=(
+  dash@6
+  firefox
+  ghostty
+  gitup-app
+  google-chrome
+  iterm2
+  itsycal
+  suspicious-package
+  the-unarchiver
+  zed
+)
+
+for C in "${CASKS[@]}"; do
+  brew install --cask "$C"
+done
