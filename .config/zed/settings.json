@@ -9,10 +9,12 @@
 {
   // === UI/Editor Config ====================================================
   "base_keymap": "SublimeText",
-  "buffer_font_family": "PragmataPro Liga",
+  "buffer_font_family": "PragmataPro Mono Liga",
   "buffer_font_features": {
     "dlig": true,
     "ss13": true,
+    "ss15": true,
+    "ss18": true,
   },
   "buffer_font_size": 16.0,
   "buffer_line_height": "comfortable",
