@@ -13,6 +13,11 @@ safelink() {
   DOTFILE="$1"
   CONFIG="$2"
 
+  # Bail if the dotfile doesn't exist
+  if [[ ! -e "$DOTFILE" ]]; then
+    return
+  fi
+
   # Continue if the link already exists
   if [[ -L "$CONFIG" && "$DOTFILE" = "$(readlink "$CONFIG")" ]]; then
     debug_msg "link $CONFIG -> $DOTFILE is already set up."
@@ -61,6 +66,8 @@ defaults write -globalDomain WebAutomaticSpellingCorrectionEnabled -bool false
 defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "$HOME/.config/dotfiles/Library/Preferences"
 defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true
 safelink_config sublime-text "Application Support/Sublime Text"
+safelink_config Code "Application Support/Code"
+safelink_config Cursor "Application Support/Cursor"
 
 # Install homebrew
 if ! which -s brew; then
