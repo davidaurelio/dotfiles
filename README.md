@@ -5,7 +5,7 @@
 Install with
 
 ```sh
-git clone --bare git@github.com:davidaurelio/dotfiles.git $HOME/.dotfiles
+git clone --separate-git-dir="$HOME/.dotfiles" --no-checkout git@github.com:davidaurelio/dotfiles.git "$(mktemp -d -t dotfiles)"
 alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 dotfiles config --local status.showUntrackedFiles no
 dotfiles sparse-checkout init --no-cone
