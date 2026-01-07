@@ -3,3 +3,4 @@ font-feature = ss13,ss15,ss18
 font-size = 18
 theme = dark:Duskfox,light:Dayfox
 copy-on-select = clipboard
+scrollback-limit = 40000000
