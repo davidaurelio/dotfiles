@@ -78,7 +78,6 @@ fi
 set +e
 
 brew install \
-  browser \
   cdecl \
   cmake \
   colordiff \
