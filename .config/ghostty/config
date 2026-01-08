@@ -1,6 +1,13 @@
+theme = dark:Duskfox,light:Dayfox
+window-show-tab-bar = always
+macos-titlebar-style = native
+
 font-family = PragmataPro Mono Liga
 font-feature = ss13,ss15,ss18
-font-size = 18
-theme = dark:Duskfox,light:Dayfox
-copy-on-select = clipboard
+font-size = 16
+font-thicken = true
+font-thicken-strength = 0
+
 scrollback-limit = 40000000
+copy-on-select = clipboard
+mouse-hide-while-typing = true
