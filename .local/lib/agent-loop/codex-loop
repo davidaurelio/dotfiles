@@ -1,0 +1,651 @@
+#!/bin/bash
+set -euo pipefail
+
+main() {
+  SELECT_STEP=""
+  FORCE_PRD=0
+  LOOP=0
+  MODEL_EFFORT="${MODEL_EFFORT:-}"
+
+  parse_args "$@"
+  local root
+  root=$(repo_root)
+  ensure_spec_dirs "$root"
+
+  local step
+  if [[ -n "$SELECT_STEP" ]]; then
+    step=$(normalize_step "$SELECT_STEP")
+  else
+    step=$(detect_step "$root")
+  fi
+
+  if [[ -z "$step" ]]; then
+    info "Planning skipped because spec/todo exists. Use --prd to force."
+    return 0
+  fi
+
+  ensure_clean_start "$root" "$step"
+  run_workflow "$root" "$step"
+}
+
+parse_args() {
+  local arg
+  for arg in "$@"; do
+    case "$arg" in
+    -h | --help)
+      usage
+      exit 0
+      ;;
+    esac
+  done
+
+  local parsed
+  parsed=$(
+    git rev-parse --parseopt --keep-dashdash --stop-at-non-option -- "$@" <<'EOF'
+codex-loop [options]
+--
+h,help          show help
+select=         start step (planning|select|execute|review)
+prd             force planning even if spec/todo exists
+loop            continue after review if backlog remains
+effort=         set model reasoning effort (low|medium|high|xhigh)
+full-auto       enable low-friction auto-exec for non-interactive steps
+EOF
+  ) || exit 1
+
+  eval "$parsed"
+  while true; do
+    case "$1" in
+    --select)
+      SELECT_STEP="$2"
+      shift 2
+      ;;
+    --effort)
+      MODEL_EFFORT="$2"
+      shift 2
+      ;;
+    --full-auto)
+      FULL_AUTO=1
+      shift
+      ;;
+    --prd)
+      FORCE_PRD=1
+      shift
+      ;;
+    --loop)
+      LOOP=1
+      shift
+      ;;
+    -h | --help)
+      usage
+      exit 0
+      ;;
+    --)
+      shift
+      break
+      ;;
+    *) die "Unknown option: $1" ;;
+    esac
+  done
+
+  if [[ $# -gt 0 ]]; then
+    die "Unexpected arguments: $*"
+  fi
+}
+
+ensure_clean_start() {
+  local root="$1"
+  local step="$2"
+
+  case "$step" in
+  planning | select)
+    if [[ -n "$(git -C "$root" status --porcelain)" ]]; then
+      die "Working tree not clean; commit or stash changes before starting ($step)."
+    fi
+    ;;
+  esac
+}
+
+run_workflow() {
+  local root="$1"
+  local step="$2"
+
+  while [[ -n "$step" ]]; do
+    case "$step" in
+    planning)
+      if ! planning_allowed "$root"; then
+        info "Planning skipped because spec/todo exists. Use --prd to force."
+        return 0
+      fi
+      run_planning "$root"
+      git_commit_planning "$root"
+      step=""
+      ;;
+    select)
+      run_selection "$root"
+      if has_files "$root/spec/in-review"; then
+        step="review"
+      elif has_files "$root/spec/in-progress"; then
+        step="execute"
+      else
+        step=""
+      fi
+      ;;
+    execute)
+      run_execution "$root"
+      if has_files "$root/spec/in-review"; then
+        step="review"
+      elif has_files "$root/spec/in-progress"; then
+        die "Execution completed but PRD is still in spec/in-progress; expected move to spec/in-review"
+      else
+        die "Execution completed but no PRD found in spec/in-progress or spec/in-review"
+      fi
+      ;;
+    review)
+      local prd_basename
+      prd_basename=$(single_file_basename "$root/spec/in-review")
+      run_review "$root"
+      if has_files "$root/spec/in-review"; then
+        die "Review completed but PRD is still in spec/in-review; expected move to spec/done or back to spec/in-progress"
+      fi
+      git_commit_review "$root" "$prd_basename"
+      if has_files "$root/spec/in-progress"; then
+        step="execute"
+      elif [[ "$LOOP" -eq 1 ]] && has_files "$root/spec/backlog"; then
+        step="select"
+      else
+        step=""
+      fi
+      ;;
+    *)
+      die "Unknown step: $step"
+      ;;
+    esac
+  done
+}
+
+run_planning() {
+  local root="$1"
+  run_codex_interactive "$MODEL_PLANNING" "$root" "$(planning_prompt "$root")"
+}
+
+run_selection() {
+  local root="$1"
+  run_codex "$MODEL_SELECTION" "$root" "$(selection_prompt "$root")"
+}
+
+run_execution() {
+  local root="$1"
+  run_codex_with_stats "$MODEL_EXECUTION" "$root" "$(execution_prompt "$root")"
+}
+
+run_review() {
+  local root="$1"
+  run_codex_with_stats "$MODEL_REVIEW" "$root" "$(review_prompt "$root")"
+}
+
+run_codex() {
+  local model="$1"
+  local root="$2"
+  local prompt="$3"
+  local -a cmd
+
+  cmd=("$CODEX_BIN" exec -C "$root")
+  if [[ -n "$model" ]]; then
+    cmd+=(-m "$model")
+  fi
+  if [[ "$FULL_AUTO" -eq 1 ]]; then
+    cmd+=(--full-auto)
+  elif [[ -n "$SANDBOX_MODE" ]]; then
+    cmd+=(-s "$SANDBOX_MODE")
+  fi
+  if [[ -n "$MODEL_EFFORT" ]]; then
+    cmd+=(-c "model_reasoning_effort=\"${MODEL_EFFORT}\"")
+  fi
+
+  printf '%s' "$prompt" | "${cmd[@]}" -
+}
+
+run_codex_with_stats() {
+  local model="$1"
+  local root="$2"
+  local prompt="$3"
+  local -a cmd
+  local tmp
+  local start end duration
+
+  tmp=$(mktemp)
+  start=$(date +%s)
+
+  cmd=("$CODEX_BIN" exec -C "$root" --json)
+  if [[ -n "$model" ]]; then
+    cmd+=(-m "$model")
+  fi
+  if [[ "$FULL_AUTO" -eq 1 ]]; then
+    cmd+=(--full-auto)
+  elif [[ -n "$SANDBOX_MODE" ]]; then
+    cmd+=(-s "$SANDBOX_MODE")
+  fi
+  if [[ -n "$MODEL_EFFORT" ]]; then
+    cmd+=(-c "model_reasoning_effort=\"${MODEL_EFFORT}\"")
+  fi
+
+  printf '%s' "$prompt" | "${cmd[@]}" - >"$tmp"
+
+  end=$(date +%s)
+  duration=$((end - start))
+
+  local last_message usage_json
+  last_message=$(jq -cr 'select(.type=="item.completed" and .item.type=="agent_message") | .item.text' "$tmp" | tail -n 1)
+  usage_json=$(jq -cr 'select(.type=="turn.completed") | .usage' "$tmp" | tail -n 1)
+
+  if [[ -n "$last_message" ]]; then
+    printf '%s\n' "$last_message"
+  fi
+
+  if [[ -n "$usage_json" ]]; then
+    local input_tokens output_tokens cached_tokens total_tokens
+    input_tokens=$(printf '%s' "$usage_json" | jq -cr '.input_tokens // 0')
+    output_tokens=$(printf '%s' "$usage_json" | jq -cr '.output_tokens // 0')
+    cached_tokens=$(printf '%s' "$usage_json" | jq -cr '.cached_input_tokens // 0')
+    total_tokens=$((input_tokens + output_tokens))
+    printf 'STATS: duration=%ss, input_tokens=%s, output_tokens=%s, cached_input_tokens=%s, total_tokens=%s\n' \
+      "$duration" "$input_tokens" "$output_tokens" "$cached_tokens" "$total_tokens"
+  else
+    printf 'STATS: duration=%ss, tokens=unknown\n' "$duration"
+  fi
+
+  rm -f "$tmp"
+}
+
+run_codex_interactive() {
+  local model="$1"
+  local root="$2"
+  local prompt="$3"
+  local -a cmd
+
+  cmd=("$CODEX_BIN" -C "$root")
+  if [[ -n "$model" ]]; then
+    cmd+=(-m "$model")
+  fi
+  if [[ -n "$SANDBOX_MODE" ]]; then
+    cmd+=(-s "$SANDBOX_MODE")
+  fi
+  if [[ -n "$MODEL_EFFORT" ]]; then
+    cmd+=(-c "model_reasoning_effort=\"${MODEL_EFFORT}\"")
+  fi
+
+  "${cmd[@]}" "$prompt"
+}
+
+detect_step() {
+  local root="$1"
+
+  if has_files "$root/spec/in-review"; then
+    if has_files "$root/spec/in-progress"; then
+      die "Both spec/in-review and spec/in-progress contain files; resolve manually"
+    fi
+    printf '%s\n' "review"
+    return
+  fi
+
+  if has_files "$root/spec/in-progress"; then
+    printf '%s\n' "execute"
+    return
+  fi
+
+  if has_files "$root/spec/backlog"; then
+    printf '%s\n' "select"
+    return
+  fi
+
+  if planning_allowed "$root"; then
+    printf '%s\n' "planning"
+    return
+  fi
+
+  printf '%s\n' ""
+}
+
+normalize_step() {
+  local step="$1"
+  case "$step" in
+  plan | planning) printf '%s\n' "planning" ;;
+  select | selection) printf '%s\n' "select" ;;
+  exec | execute | execution) printf '%s\n' "execute" ;;
+  review) printf '%s\n' "review" ;;
+  *) die "Invalid --select value: $step" ;;
+  esac
+}
+
+planning_allowed() {
+  local root="$1"
+  if [[ "$FORCE_PRD" -eq 1 ]]; then
+    return 0
+  fi
+  if has_spec_todo "$root"; then
+    return 1
+  fi
+  return 0
+}
+
+ensure_spec_dirs() {
+  local root="$1"
+  mkdir -p \
+    "$root/spec/backlog" \
+    "$root/spec/in-progress" \
+    "$root/spec/in-review" \
+    "$root/spec/done"
+}
+
+has_files() {
+  local dir="$1"
+  [[ -d "$dir" ]] || return 1
+  local found
+  found=$(find "$dir" -maxdepth 1 -type f -print -quit 2>/dev/null)
+  [[ -n "$found" ]]
+}
+
+single_file_basename() {
+  local dir="$1"
+  local -a files=()
+
+  while IFS= read -r -d '' file; do
+    files+=("$file")
+  done < <(find "$dir" -maxdepth 1 -type f -print0 2>/dev/null)
+
+  if [[ "${#files[@]}" -eq 0 ]]; then
+    die "Expected exactly one file in $dir, found none"
+  fi
+  if [[ "${#files[@]}" -gt 1 ]]; then
+    die "Expected exactly one file in $dir, found ${#files[@]}"
+  fi
+
+  basename "${files[0]}"
+}
+
+git_commit_planning() {
+  local root="$1"
+
+  if [[ -z "$(git -C "$root" status --porcelain)" ]]; then
+    info "No planning changes to commit."
+    return 0
+  fi
+
+  git_ensure_only_planning_changes "$root"
+  git -C "$root" add -A -- spec/backlog
+  if [[ -e "$root/AGENTS.md" ]]; then
+    git -C "$root" add -A -- AGENTS.md
+  fi
+
+  if git -C "$root" diff --cached --quiet; then
+    info "No planning changes to commit."
+    return 0
+  fi
+
+  git -C "$root" commit -m "spec: add PRDs"
+}
+
+git_ensure_only_planning_changes() {
+  local root="$1"
+  local -a changed_paths=()
+
+  local entry status path
+  while IFS= read -r -d '' entry; do
+    status="${entry:0:2}"
+    path="${entry:3}"
+    changed_paths+=("$path")
+    case "$status" in
+    R* | C*)
+      if IFS= read -r -d '' entry; then
+        changed_paths+=("$entry")
+      fi
+      ;;
+    esac
+  done < <(git -C "$root" status --porcelain=v1 -z -uall)
+
+  local -a disallowed=()
+  for path in "${changed_paths[@]}"; do
+    case "$path" in
+    AGENTS.md | spec/backlog/*) ;;
+    *) disallowed+=("$path") ;;
+    esac
+  done
+
+  if [[ "${#disallowed[@]}" -gt 0 ]]; then
+    printf 'error: planning modified unexpected files:\n' >&2
+    printf '  - %s\n' "${disallowed[@]}" >&2
+    exit 1
+  fi
+}
+
+git_commit_review() {
+  local root="$1"
+  local prd_basename="$2"
+  local prd_name
+  prd_name="${prd_basename%.md}"
+
+  git -C "$root" add -A
+  if git -C "$root" diff --cached --quiet; then
+    info "No review changes to commit."
+    return 0
+  fi
+
+  local msg
+  if [[ -f "$root/spec/done/$prd_basename" ]]; then
+    msg="task: $prd_name"
+  elif [[ -f "$root/spec/in-progress/$prd_basename" ]]; then
+    msg="wip: $prd_name (review rejected)"
+  else
+    msg="review: $prd_name"
+  fi
+  git -C "$root" commit -m "$msg"
+}
+
+has_spec_todo() {
+  local root="$1"
+  local todo="$root/spec/todo"
+
+  if [[ -f "$todo" ]]; then
+    return 0
+  fi
+  if [[ -d "$todo" ]]; then
+    has_files "$todo"
+    return
+  fi
+  return 1
+}
+
+repo_root() {
+  git rev-parse --show-toplevel 2>/dev/null || die "Not inside a git repository (required)."
+}
+
+usage() {
+  cat <<'EOF'
+Usage: codex-loop [options]
+
+Options:
+  --select <step>  start at a specific step (planning|select|execute|review)
+  --prd            force planning even if spec/todo exists
+  --loop           after review, continue if backlog remains
+  --full-auto      enable low-friction auto-exec for non-interactive steps
+  --effort <level> set model reasoning effort (low|medium|high|xhigh)
+  -h, --help       show help
+
+Notes:
+  Creates git commits after planning and after review.
+
+Environment:
+  CODEX_BIN              codex executable (default: codex)
+  CODEX_SANDBOX_MODE     codex sandbox mode (default: workspace-write)
+  CODEX_MODEL            default model for all phases
+  CODEX_MODEL_PLANNING   overrides model for planning
+  CODEX_MODEL_SELECTION  overrides model for selection
+  CODEX_MODEL_EXECUTION  overrides model for execution
+  CODEX_MODEL_REVIEW     overrides model for review
+  CODEX_MODEL_REASONING_EFFORT sets model reasoning effort (low|medium|high|xhigh)
+  CODEX_FULL_AUTO         enables low-friction auto-exec for non-interactive steps
+EOF
+}
+
+info() {
+  printf '%s\n' "$*"
+}
+
+die() {
+  printf 'error: %s\n' "$*" >&2
+  exit 1
+}
+
+planning_prompt() {
+  local root="$1"
+
+  cat <<'EOF'
+You are running the Planning phase of an agentic Codex workflow.
+
+Process:
+- Do not run git commit; the driver script handles commits.
+- Collaborate with the human; ask follow-up questions until requirements are unambiguous.
+- Prefer multiple small PRDs over a single large PRD (each PRD must be doable in one later execution run).
+- Before writing, skim existing PRDs in spec/backlog/ to avoid duplicates.
+- Keep going: after finishing a PRD, ask whether to create another; stop only when the human says to stop.
+
+Where to write:
+- Create new PRDs in spec/backlog/*.md.
+
+PRD template (copy/paste and fill in):
+
+# <Title>
+
+Priority: <P0|P1|P2>
+
+## In scope
+- ...
+
+## Out of scope
+- ...
+
+## Technical hints
+- ...
+
+## Acceptance criteria
+- ...
+
+## Test plan
+- ...
+
+PRD format (required sections):
+- Title
+- Priority
+- In scope
+- Out of scope
+- Technical hints
+
+PRD format (strongly recommended):
+- Acceptance criteria (how we know it's done)
+- Test plan (what to test; where to add tests)
+
+Output:
+- Create one or more PRD files and print the filenames you created.
+EOF
+
+  if [[ ! -f "$root/AGENTS.md" ]]; then
+    cat <<'EOF'
+
+AGENTS.md is missing.
+- First, ask the human for repo-specific coding rules (style/formatting, linting, tests, preferred languages/tools, directories to avoid).
+- Then create AGENTS.md capturing those rules before writing PRDs.
+EOF
+  else
+    cat <<'EOF'
+
+Read AGENTS.md and follow its rules during planning.
+EOF
+  fi
+}
+
+selection_prompt() {
+  cat <<'EOF'
+You are running Task Selection.
+
+Instructions:
+- Do not ask the human questions.
+- Do not modify code or PRD contents.
+- Do not run git commit; the driver script handles commits.
+- If spec/in-progress/ or spec/in-review/ already contains a PRD, exit without changes.
+- Read AGENTS.md and every PRD in spec/backlog/.
+- Select exactly one PRD (most important):
+  - Highest priority first (P0 > P1 > P2; for numbers, lower is higher; if missing, assume low).
+  - If tied, prefer the smallest/self-contained PRD or the one that unblocks others.
+- Move the chosen file to spec/in-progress/ (same filename) using git mv.
+- Print which PRD you selected and why (1-2 lines).
+
+If spec/backlog/ is empty, exit without changes.
+EOF
+}
+
+execution_prompt() {
+  cat <<'EOF'
+You are running Task Execution.
+
+Instructions:
+- Read the PRD in spec/in-progress/ (expect exactly one).
+- Follow AGENTS.md.
+- Implement only what the PRD requests; keep changes minimal and focused.
+- Do not run git commit; the driver script handles commits.
+
+Tests and lint:
+- Figure out how this repo runs lint and tests (README, CI config, package scripts, Makefile, etc).
+- Add or update tests as necessary.
+- Each new test must include a short comment explaining intent.
+- Mock as little of our own code as possible; prefer test doubles only at I/O boundaries.
+- Keep linting and tests fast; do not disable them unless absolutely unavoidable.
+- Do not finish until lint and all tests pass.
+
+State transition:
+- After lint and all tests pass, move the PRD from spec/in-progress/ to spec/in-review/
+  using git mv.
+
+Updates:
+- Append learnings to PROGRESS.md (append; do not overwrite). This a log of patterns and pitfalls, not finished tasks.
+- Update AGENTS.md if new, durable repo rules emerge.
+
+Output:
+- Summarize changes and the commands you ran to verify lint/tests.
+EOF
+}
+
+review_prompt() {
+  cat <<'EOF'
+You are running Review.
+
+Instructions:
+- Do not ask the human questions.
+- Read the PRD in spec/in-review/ (expect exactly one).
+- Review the implementation against the PRD. Improve the code if needed.
+- Run lint and tests; keep them passing (do not disable them).
+- Do not run git commit; the driver script handles commits.
+
+Decision:
+- If you accept, move the PRD to spec/done/ using git mv.
+- If you reject, append a section to the PRD describing the rejected approach, concrete reasons,
+  and guidance for the next attempt. Then move the PRD back to spec/in-progress/
+  using git mv so the next execution attempt can start from it.
+
+Output:
+- Print ACCEPTED or REJECTED and a brief rationale.
+EOF
+}
+
+CODEX_BIN="${CODEX_BIN:-codex}"
+SANDBOX_MODE="${CODEX_SANDBOX_MODE:-workspace-write}"
+BASE_MODEL="${CODEX_MODEL:-}"
+REVIEW_BASE_MODEL="${CODEX_MODEL_REVIEW:-$BASE_MODEL}"
+MODEL_PLANNING="${CODEX_MODEL_PLANNING:-$BASE_MODEL}"
+MODEL_SELECTION="${CODEX_MODEL_SELECTION:-$BASE_MODEL}"
+MODEL_EXECUTION="${CODEX_MODEL_EXECUTION:-$BASE_MODEL}"
+MODEL_REVIEW="${CODEX_MODEL_REVIEW:-$REVIEW_BASE_MODEL}"
+MODEL_EFFORT="${CODEX_MODEL_REASONING_EFFORT:-}"
+FULL_AUTO="${CODEX_FULL_AUTO:-0}"
+
+main "$@"
