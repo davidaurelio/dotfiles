@@ -1,6 +1,18 @@
 #!/bin/bash
 set -euo pipefail
 
+# codex-loop drives a multi-phase, agentic workflow around PRDs stored in spec/.
+# Planning is interactive (human + Codex) and writes new PRDs to spec/backlog/.
+# Selection picks one PRD into spec/in-progress/, execution implements it and moves
+# it to spec/in-review/, and review either accepts into spec/done/ or rejects back
+# to spec/in-progress/. Use --select to start at a specific step; --loop repeats
+# selection after review when backlog remains. The script commits after planning
+# and after review; prompts and phase details are defined near the end.
+#
+# Environment overrides: CODEX_BIN, CODEX_SANDBOX_MODE, CODEX_MODEL, per-phase
+# CODEX_MODEL_* vars, CODEX_MODEL_REASONING_EFFORT, and CODEX_FULL_AUTO control
+# the Codex CLI invocation. See the usage output for the full list.
+
 main() {
   SELECT_STEP=""
   FORCE_PRD=0
