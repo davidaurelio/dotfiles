@@ -634,7 +634,7 @@ You are running Review.
 Instructions:
 - Do not ask the human questions.
 - Read the PRD in spec/in-review/ (expect exactly one).
-- Review the implementation against the PRD. Improve the code if needed.
+- Review the implementation in the latest commit against the PRD. Improve the code if needed.
 - Run lint and tests; keep them passing (do not disable them).
 - Do not run git commit; the driver script handles commits.
 
