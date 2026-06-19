@@ -66,6 +66,7 @@ defaults write -globalDomain WebAutomaticSpellingCorrectionEnabled -bool false
 defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "$HOME/.config/dotfiles/Library/Preferences"
 defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true
 safelink_config sublime-text "Application Support/Sublime Text"
+safelink_config lazygit "Application Support/lazygit"
 safelink_config Code "Application Support/Code"
 safelink_config Cursor "Application Support/Cursor"
 

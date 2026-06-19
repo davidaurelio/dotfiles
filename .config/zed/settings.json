@@ -8,6 +8,19 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   // === UI/Editor Config ====================================================
+  "cli_default_open_behavior": "existing_window",
+  "project_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "edit_predictions": {
+    "provider": "copilot"
+  },
   "agent_ui_font_size": 16.0,
   "agent_buffer_font_size": 15.0,
   "base_keymap": "SublimeText",
@@ -45,10 +58,26 @@
   "vim_mode": true,
   "wrap_guides": [79, 88, 100, 120],
 
+  // === Languages ===========================================================
+  "languages": {
+    "Markdown": {
+      "soft_wrap": "bounded",
+      "preferred_line_length": 79,
+    },
+  },
+
   // === Features / AI =======================================================
   "agent": {
+    "sidebar_side": "right",
+    "dock": "right",
+    "tool_permissions": {
+      "default": "allow"
+    },
+    "inline_assistant_model": {
+      "provider": "copilot_chat",
+      "model": "claude-opus-4.5",
+    },
     "use_modifier_to_send": true,
-    "always_allow_tool_actions": true,
     "default_model": {
       "model": "gpt-5.2",
       "provider": "copilot_chat",
@@ -57,10 +86,8 @@
     "model_parameters": [],
   },
   "collaboration_panel": {
+    "dock": "left",
     "button": true,
-  },
-  "features": {
-    "edit_prediction_provider": "copilot",
   },
   "preview_tabs": {
     "enable_preview_multibuffer_from_code_navigation": true,
@@ -85,5 +112,24 @@
     "sublime-mariana-theme": true,
     "toml": true,
     "xml": true,
+  },
+
+  // === CUSTOM ==============================================================
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    },
+    "github-copilot-cli": {
+      "type": "registry"
+    },
+    "codex-acp": {
+      "type": "registry"
+    },
+    "cursor-agent": {
+      "type": "custom",
+      "command": "pnpx",
+      "args": ["@blowmage/cursor-agent-acp"],
+      "env": {},
+    },
   },
 }
