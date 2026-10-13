@@ -3,7 +3,8 @@
 # from the ambient GH_HOST (which is commonly github.com and silently wrong on GHE).
 #
 # Usage:
-#   pr_submit.sh <pr-number> <verdict> <body-file> [--blocking N] [--remote NAME] [--inline comments.json] [--validate] [--dry-run]
+#   pr_submit.sh <pr-number> <verdict> <body-file> [--blocking N] [--remote NAME]
+#                [--user LOGIN] [--inline comments.json] [--validate] [--dry-run]
 #
 #   verdict: request_changes | approve_with_conditions | approve | comment
 #
@@ -13,7 +14,7 @@ set -euo pipefail
 
 die() { echo "pr_submit: $*" >&2; exit 1; }
 
-[[ $# -ge 3 ]] || die "usage: pr_submit.sh <pr-number> <verdict> <body-file> [--blocking N] [--remote NAME] [--inline comments.json] [--validate] [--dry-run]"
+[[ $# -ge 3 ]] || die "usage: pr_submit.sh <pr-number> <verdict> <body-file> [--blocking N] [--remote NAME] [--user LOGIN] [--inline comments.json] [--validate] [--dry-run]"
 PR_NUM="$1"; VERDICT="$2"; BODY_FILE="$3"; shift 3
 
 BLOCKING=0
@@ -21,10 +22,12 @@ DRY_RUN=0
 VALIDATE=0
 REMOTE="origin"
 INLINE=""
+GH_USER=""
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --blocking) BLOCKING="${2:?--blocking needs a count}"; shift 2 ;;
     --remote)   REMOTE="${2:?--remote needs a name}"; shift 2 ;;
+    --user)     GH_USER="${2:?--user needs a login}"; shift 2 ;;
     --inline)   INLINE="${2:?--inline needs a comments.json}"; shift 2 ;;
     --validate) VALIDATE=1; shift ;;
     --dry-run)  DRY_RUN=1; shift ;;
@@ -48,6 +51,35 @@ HOST="$(printf '%s' "$REMOTE_URL" | sed -E 's#^[a-z]+://([^@]*@)?([^/]+)/.*#\2#;
 REPO="$(printf '%s' "$REMOTE_URL" | sed -E 's#^[a-z]+://([^@]*@)?[^/]+/##; s#^([^@]*@)?[^:]+:##; s#\.git$##')"
 [[ -n "$HOST" && "$REPO" == */* ]] || die "could not derive host/repo from remote: $REMOTE_URL"
 export GH_HOST="$HOST"
+
+# Copilot and CI environments commonly inject GH_TOKEN. gh gives that token
+# precedence over the user's selected keyring account, which can silently post
+# as the wrong identity. Prefer the active keyring account when one exists;
+# retain environment auth only for headless environments without keyring auth.
+KEYRING_TOKEN=""
+AUTH_SOURCE="environment"
+if [[ -n "$GH_USER" ]]; then
+  KEYRING_TOKEN="$(env -u GH_TOKEN -u GITHUB_TOKEN gh auth token \
+    --hostname "$HOST" --user "$GH_USER" 2>/dev/null)" \
+    || die "no keyring credential for $GH_USER on $HOST"
+elif KEYRING_TOKEN="$(env -u GH_TOKEN -u GITHUB_TOKEN gh auth token \
+  --hostname "$HOST" 2>/dev/null)"; then
+  :
+fi
+
+if [[ -n "$KEYRING_TOKEN" ]]; then
+  export GH_TOKEN="$KEYRING_TOKEN"
+  unset GITHUB_TOKEN
+  AUTH_SOURCE="keyring"
+elif [[ -z "${GH_TOKEN:-}" && -z "${GITHUB_TOKEN:-}" ]]; then
+  die "no GitHub credential available for $HOST"
+fi
+
+AUTH_LOGIN="$(gh api user --jq .login 2>/dev/null)" \
+  || die "could not authenticate to $HOST"
+if [[ -n "$GH_USER" && "$AUTH_LOGIN" != "$GH_USER" ]]; then
+  die "requested GitHub user $GH_USER but authenticated as $AUTH_LOGIN"
+fi
 
 case "$VERDICT" in
   request_changes)         FLAG="--request-changes"; EVENT="REQUEST_CHANGES" ;;
@@ -88,7 +120,7 @@ if [[ "$VALIDATE" == "1" ]]; then
   exit 0
 fi
 
-echo "pr_submit: host=$HOST repo=$REPO pr=$PR_NUM verdict=$VERDICT inline=$N_INLINE"
+echo "pr_submit: host=$HOST repo=$REPO pr=$PR_NUM verdict=$VERDICT inline=$N_INLINE auth=$AUTH_LOGIN source=$AUTH_SOURCE"
 if [[ "$DRY_RUN" == "1" ]]; then
   echo "pr_submit: --dry-run, nothing posted. Body preview:"
   head -40 "$BODY_FILE"
@@ -135,7 +167,7 @@ elif ! OUT="$(gh pr review "$PR_NUM" --repo "$REPO" "$FLAG" --body-file "$BODY_F
 fi
 
 # Verify rather than trust: confirm the review actually landed and read back its state.
-LOGIN="$(gh api user --jq .login 2>/dev/null || echo "")"
+LOGIN="$AUTH_LOGIN"
 LATEST="$(gh pr view "$PR_NUM" --repo "$REPO" --json reviews \
   --jq "[.reviews[] | select(.author.login == \"${LOGIN}\")] | last | \"\(.state) \(.submittedAt)\"" 2>/dev/null || echo "")"
 if [[ -z "$LATEST" || "$LATEST" == "null null" ]]; then

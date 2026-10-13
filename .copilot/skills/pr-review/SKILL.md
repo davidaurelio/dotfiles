@@ -174,8 +174,10 @@ scripts/pr_submit.sh <pr> <verdict> body.md --blocking <n> --inline comments.jso
 Verdicts: `request_changes`, `approve_with_conditions` (posts as a comment review — GitHub
 has no such state), `approve`, `comment`. The script refuses to approve when `--blocking` is
 non-zero, falls back to a comment review on your own PR, and reads the review back to
-confirm it landed. If the inline post fails it still posts the summary and says so loudly,
-rather than losing the review.
+confirm it landed. It prefers the active `gh` keyring account over ambient `GH_TOKEN` /
+`GITHUB_TOKEN` overrides; pass `--user <login>` to require a specific keyring identity. If
+the inline post fails it still posts the summary and says so loudly, rather than losing the
+review.
 
 ## Hard rules
 
